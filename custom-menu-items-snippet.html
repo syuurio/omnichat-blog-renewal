@@ -1,0 +1,72 @@
+<div class="custom-menu-items wp-block-navigation" id="custom-menu-items">
+  <div class="wp-block-navigation-item">
+    <button class="search-btn" anchor-to-search>
+      <span class="material-symbols-outlined" style="font-size: 2em;">search</span>
+    </button>
+  </div>
+  <div class="custom-menu-items__dropdown wp-block-navigation-submenu wp-block-navigation-item open-on-click">
+    <button class="custom-menu-items__dropdown-btn wp-block-navigation-submenu__toggle lang-btn">
+      <span class="material-symbols-outlined">public</span>
+    </button>
+    <span class="wp-block-navigation__submenu-icon"></span>
+    <ul class="custom-menu-items__dropdown-item wp-block-navigation__submenu-container" id="lang-list">
+      <?php pll_the_languages(); ?>
+    </ul>
+    <!-- <?php echo do_shortcode('[polylang_langswitcher]'); ?> -->
+  </div>
+</div>
+<script>
+  const nav = document.querySelector('#navbar .nav-menu')
+  const menu = document.getElementById('custom-menu-items')
+  const appendTarget = nav.querySelector('.wp-block-navigation__responsive-container-content')
+  const isMobile = window.matchMedia('(max-width: 768px)').matches
+  // replaceAnchor.replaceWith(menu)
+  appendTarget.append(menu)
+
+  menu.querySelectorAll('.custom-menu-items__dropdown').forEach(el => {
+    const trigger = el.querySelector('.custom-menu-items__dropdown-btn')
+
+    trigger.addEventListener('click', (e) => {
+      e.currentTarget.setAttribute('aria-expanded', e.currentTarget.getAttribute('aria-expanded') === 'true' ? 'false' : 'true')
+    })
+
+    document.documentElement.addEventListener('click', (e) => {
+      if (!el.contains(e.target)) {
+        trigger.setAttribute('aria-expanded', 'false')
+      }
+    })
+  })
+
+  const dropdownEls = document.querySelectorAll('.wp-block-navigation-submenu:has(.wp-block-navigation__submenu-container)')
+  const observeAttribute = 'aria-expanded'
+  dropdownEls.forEach(el => {
+
+    const observer = new MutationObserver((mutationList) => {
+      for (const { attributeName, target } of mutationList) {
+        if (attributeName === observeAttribute) {
+          const submenu = el.querySelector('.wp-block-navigation__submenu-container')
+          const isOpen = target.getAttribute(attributeName) === 'true'
+
+          if (submenu.childElementCount > 10) {
+            el.style.setProperty('--col', 2)
+          }
+
+
+          if (isOpen) {
+            const { width, right } = submenu.getBoundingClientRect()
+            const pinTop = nav.offsetHeight + 5
+
+            if (right > window.innerWidth) {
+              submenu.style = `left: auto; right: 0; top: ${pinTop}px`
+            } else {
+              submenu.style = `left: 50%; translate: -50%; top: ${pinTop}px`
+            }
+          } else {
+            submenu.style = ''
+          }
+        }
+      }
+    });
+    observer.observe(el, { subtree: true, attributeFilter: [observeAttribute] })
+  })
+</script>
