@@ -1,3 +1,7 @@
+:root {
+  scroll-behavior: smooth;
+}
+
 :lang(zh) {
   .dynamic-title {
     > * {
@@ -306,6 +310,60 @@ body {
     transition: all 200ms ease;
   }
 }
+
+
+.custom-input {
+  position: relative;
+
+  &::before {
+    font-family: 'Material Symbols Outlined';
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5a5a5a;
+    z-index: 1;
+    font-size: 1.5rem;
+
+    @media (width <= 768px) {
+      left: 1rem;
+    }
+  }
+
+  input {
+    padding: 1.7rem 2rem 1.7rem 5.31rem;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+    color: #979797;
+    letter-spacing: 0.02em;
+
+    &::placeholder {
+      color: #979797;
+    }
+
+    @media (width <= 768px) {
+      padding: 1rem 2rem 1rem 3.2rem;
+    }
+  }
+
+  &:has(input:focus),
+  &:has(input:focus-visible),
+  &:hover {
+    &::before {
+      color: #006AFF;
+    }
+
+    input {
+      outline: 2px solid #006AFF;
+    }
+  }
+
+  &.custom-search {
+    &::before {
+      content: '\e8b6';
+    }
+  }
+}
+
 /* Component Class End */
 
 .custom-menu-items {
@@ -503,45 +561,6 @@ body {
   align-items: center;
   gap: 8px;
 } */
-
-.custom-search {
-  position: relative;
-
-  &::before {
-    content: '\e8b6';
-    font-family: 'Material Symbols Outlined';
-    position: absolute;
-    left: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #5a5a5a;
-    z-index: 1;
-    font-size: 1.5rem;
-  }
-
-  .wp-block-search__input {
-    padding: 1.7rem 2rem 1.7rem 5.31rem;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
-    color: #979797;
-    letter-spacing: 0.02em;
-
-    &::placeholder {
-      color: #979797;
-    }
-  }
-
-  &:has(input:focus),
-  &:has(input:focus-visible),
-  &:hover {
-    &::before {
-      color: #006AFF;
-    }
-
-    .wp-block-search__input {
-      outline: 2px solid #006AFF;
-    }
-  }
-}
 
 .logo-gallery {
   position: relative;
