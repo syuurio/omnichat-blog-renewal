@@ -252,6 +252,7 @@ body {
     grid-auto-flow: row;
     gap: 60px;
     justify-content: space-between;
+    margin-bottom: 70px;
   
     @media (width <= 1280px) {
       gap: 40px;
@@ -407,6 +408,91 @@ body {
   }
 }
 
+.custom-pagination {
+  display: grid !important;
+  place-content: center;
+  place-items: center;
+  grid-template-columns: 38px auto 38px;
+  gap: 20px;
+  font-family: Outfit, Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+
+  .wp-block-query-pagination-previous,
+  .wp-block-query-pagination-next,
+  .wp-block-query-pagination-numbers {
+    margin: 0;
+  }
+
+  .wp-block-query-pagination-numbers {
+    grid-column: 2 / 3;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    align-items: center;
+
+
+    &::after {
+      content: '|';
+      grid-column: 2 / 3;
+      font-weight: 400;
+    }
+  }
+
+  .page-numbers:not(:last-child):not(.current) {
+    display: none;
+  }
+
+  .wp-block-query-pagination-previous::after,
+  .wp-block-query-pagination-next::after {
+    font-family: 'Material Symbols Outlined';
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 12px;
+    border: 2px solid currentColor;
+  }
+
+  .wp-block-query-pagination-previous::after {
+    content: '\e5cb';
+  }
+
+  .wp-block-query-pagination-next::after {
+    content: '\e5cc';
+  }
+
+  &:not(:has(.wp-block-query-pagination-previous))::before,
+  &:not(:has(.wp-block-query-pagination-next))::after {
+    font-family: 'Material Symbols Outlined';
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #dedede;
+    border-radius: 12px;
+    border: 2px solid currentColor;
+  }
+
+  &:not(:has(.wp-block-query-pagination-previous)) {
+    &::before {
+      content: '\e5cb';
+      grid-column: 1 / 2;
+    }
+  }
+
+  &:not(:has(.wp-block-query-pagination-next)) {
+    &::after {
+      content: '\e5cc';
+      grid-column: 3 / 4;
+    }
+  }
+}
 /* Component Class End */
 
 .custom-menu-items {
@@ -770,17 +856,22 @@ body {
     --ratio: 396/198;
   }
 
-  &__title {
-    a::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-    }
-  }
-
   .read-more {
     margin-top: auto;
     font-size: 1.125rem;
+
+
+    a {
+      &:hover {
+        color: #2e2e2e;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+    }
   }
 
   &:hover {
