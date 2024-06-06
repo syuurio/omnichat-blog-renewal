@@ -1,24 +1,23 @@
+@use "mixin" as *;
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
 :root {
   scroll-behavior: smooth;
   --grid-layout-2-1-col: 58% minmax(0, 1fr);
   --grid-layout-gap: 60px;
+  --main-border-radius: 12px;
 
-  @media (width < 1280px) {
+  @include desktop-md {
     --grid-layout-2-1-col: repeat(2, minmax(0,1fr));
     --grid-layout-gap: 30px;
   }
 
-  @media (width <= 768px) {
+  @include mobile {
     --grid-layout-2-1-col: 100%;
     --grid-layout-gap: 30px;
-  }
-}
-
-:lang(zh) {
-  .dynamic-title {
-    > * {
-      font-size: 0.9em !important;
-    }
   }
 }
 
@@ -31,6 +30,40 @@ body {
     text-decoration: none;
   }
 }
+
+/* Heading Text Start */
+#section-event {
+  .dynamic-title {
+    font-size: 1.875rem;
+    font-weight: 600;
+  }
+}
+
+:lang(zh) {
+  .dynamic-title {
+    > * {
+      font-size: 0.9em !important;
+    }
+  }
+
+  #section-event {
+    .dynamic-title {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+/* Heading Text End */
+
+/* Section Spacing Start */
+// @media (width <= 768px) {
+//   #section-event {
+//     .wp-block-spacer {
+//       height: 80px !important;
+//     }
+//   }
+// }
+/* Section Spacing End */
 
 /* Global Styles Start */
 .wp-block-navigation__submenu-icon {
@@ -62,8 +95,12 @@ body {
 
 .page-layout__header:has(#navbar) {
   position: sticky;
-  top: var(--wp-admin--admin-bar--height, 0);
+  top: 0;
   z-index: 999;
+
+  @include desktop-only {
+    top: var(--wp-admin--admin-bar--height, 0);
+  }
 }
 /* Global Styles End */
 
@@ -103,8 +140,12 @@ body {
 .aspect-img {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--main-border-radius);
   width: 100%;
+  overflow: hidden;
+  background-color: #d9d9d9;
+  margin: 0;
+  padding: 0;
   aspect-ratio: var(--ratio, 1/1);
 
   figure {
@@ -118,7 +159,7 @@ body {
     height: 100%;
     object-position: center top;
     object-fit: cover;
-    border-radius: 12px !important;
+    border-radius: inherit !important;
   }
 }
 
@@ -149,7 +190,7 @@ body {
   display: flex;
   align-items: stretch !important;
 
-  @media (width <= 768px) {
+  @include mobile {
     flex-direction: column;
     gap: 24px !important;
   }
@@ -228,7 +269,7 @@ body {
       position: absolute;
       inset: -12px -13px -15px -13px;
       background-color: #fff;
-      border-radius: 12px;
+      border-radius: var(--main-border-radius);
       filter: drop-shadow(0 4px 14px rgba(0,0,0,0.16));
       opacity: 0;
       transition: opacity 300ms ease;
@@ -253,14 +294,13 @@ body {
     gap: 60px;
     justify-content: space-between;
     margin-bottom: 70px;
-  
-    @media (width <= 1280px) {
+
+    @include desktop-md {
       gap: 40px;
     }
-  
-    @media (width <= 768px) {
+
+    @include mobile {
       --col: 1;
-      gap: 40px;
     }
   }
 }
@@ -275,7 +315,7 @@ body {
     text-align: center;
     letter-spacing: 0.02em;
     padding: 0.1em 1em;
-    border-radius: 12px;
+    border-radius: var(--main-border-radius);
     background-color: transparent;
     display: block;
     border-width: 2px;
@@ -344,7 +384,7 @@ body {
     letter-spacing: 0.02em;
     min-width: 16em !important;
     padding: 0.4em 1.5em;
-    border-radius: 12px !important;
+    border-radius: var(--main-border-radius) !important;
     background-color: var(--btn-bg-color, #006AFF);
     display: block;
     border-width: 2px;
@@ -369,7 +409,7 @@ body {
     z-index: 1;
     font-size: 1.5rem;
 
-    @media (width <= 768px) {
+    @include mobile {
       left: 1rem;
     }
   }
@@ -384,7 +424,7 @@ body {
       color: #979797;
     }
 
-    @media (width <= 768px) {
+    @include mobile {
       padding: 1rem 2rem 1rem 3.2rem;
     }
   }
@@ -418,6 +458,7 @@ body {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
+  letter-spacing: 0.04em;
 
   .wp-block-query-pagination-previous,
   .wp-block-query-pagination-next,
@@ -453,7 +494,7 @@ body {
     height: 34px;
     font-size: 24px;
     font-weight: 700;
-    border-radius: 12px;
+    border-radius: var(--main-border-radius);
     border: 2px solid currentColor;
   }
 
@@ -475,7 +516,7 @@ body {
     font-size: 24px;
     font-weight: 700;
     color: #dedede;
-    border-radius: 12px;
+    border-radius: var(--main-border-radius);
     border: 2px solid currentColor;
   }
 
@@ -553,7 +594,7 @@ body {
   //   gap: calc(2em - 24px);
   // }
 
-  @media (width > 768px) {
+  @media (width >= 600px) {
     .custom-menu-items__dropdown-item {
       position: absolute;
       // top: 100%;
@@ -572,7 +613,7 @@ body {
     }
   }
 
-  @media (width <= 768px) {
+  @media (width < 600px) {
     grid-auto-flow: row;
 
 
@@ -641,7 +682,7 @@ body {
     text-wrap: nowrap;
   }
 
-  @media (width > 768px) {
+  @media (width >= 600px) {
     .wp-block-navigation__submenu-container {
       // --gap: 1em;
       // --col: 1;
@@ -654,7 +695,7 @@ body {
     }
   }
 
-  @media (width <= 768px) {
+  @media (width < 600px) {
     .wp-block-site-logo {
       width: 120px;
 
@@ -846,18 +887,39 @@ body {
     }
   }
 }
-
 .home-event-card {
   position: relative;
-  font-size: 0.875rem;
+  display: grid;
+  grid-template-columns: 41.336% minmax(0, 1fr);
+  padding: 20px;
+  gap: var(--grid-layout-gap);
+  min-height: 240px;
   border: 1px solid #979797;
+  border-radius: var(--main-border-radius);
 
   &__img {
-    --ratio: 396/198;
+    --ratio: auto;
+    position: relative;
+
+    .aspect-img {
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-self: end;
+  }
+
+  &__content {
+    margin-block: auto;
+    font-size: 0.875rem;
   }
 
   .read-more {
-    margin-top: auto;
     font-size: 1.125rem;
 
 
@@ -882,13 +944,24 @@ body {
     }
   }
 
-  @media (width > 768px) {
-    &__info {
-      padding-top: 10px !important;
+  // @include desktop-only {
+  //   &__info {
+  //     padding-top: 10px !important;
+  //   }
+  // }
+
+  @include mobile {
+    grid-template-columns: 100%;
+
+    &__img {
+      --ratio: 396/198;
+
+      .aspect-img {
+        position: relative;
+      }
     }
   }
 }
-
 .omni-channel {
   display: grid;
 
@@ -932,7 +1005,7 @@ body {
         font-size: 1.75rem;
       }
   
-      @media (width > 768px) {
+      @include desktop-only {
         &:first-child {
           grid-row: 1 / -1;
     
@@ -1014,7 +1087,7 @@ body {
   .faq-card {
     background-color: #F5F9FF;
     border: 2px solid #979797;
-    border-radius: 12px;
+    border-radius: var(--main-border-radius);
     padding: 28px 40px 33px;
     display: grid;
     gap: 40px;
@@ -1062,7 +1135,7 @@ body {
       align-self: end;
     }
 
-    @media (width <= 768px) {
+    @include mobile {
       grid-template-columns: 100%;
       grid-auto-flow: row;
       gap: 24px;
