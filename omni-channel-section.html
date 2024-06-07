@@ -1,16 +1,15 @@
 <?php
 	$categories = array(
-		'whatsapp',
-		'line',
-		'facebook',
-		'instagram'
+		pll_get_term(2034), // whatsapp
+		pll_get_term(2036), // line
+		pll_get_term(2040), // facebook
+		pll_get_term(2038), // instagram
 	);
 
 	$tabs = [];
 	
-	foreach ($categories as $type) {
-		$catName = $type . '-' . pll_current_language();
-		$category = get_category_by_slug($catName);
+	foreach ($categories as $id) {
+		$category = get_category($id);
 		
 
 		if ($category) {
