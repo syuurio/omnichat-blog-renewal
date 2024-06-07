@@ -5,7 +5,7 @@
 }
 
 :root {
-  scroll-behavior: smooth;
+  // scroll-behavior: smooth;
   --grid-layout-2-1-col: 58% minmax(0, 1fr);
   --grid-layout-gap: 60px;
   --main-border-radius: 12px;
@@ -143,7 +143,6 @@ body {
   border-radius: var(--main-border-radius);
   width: 100%;
   overflow: hidden;
-  background-color: #d9d9d9;
   margin: 0;
   padding: 0;
   aspect-ratio: var(--ratio, 1/1);
@@ -217,6 +216,7 @@ body {
 
   &__img {
     --ratio: 386/246;
+    background-color: #d9d9d9;
   }
 
   &__info {
