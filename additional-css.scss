@@ -5,7 +5,7 @@
 }
 
 :root {
-  // scroll-behavior: smooth;
+  scroll-behavior: smooth;
   --grid-layout-2-1-col: 58% minmax(0, 1fr);
   --grid-layout-gap: 60px;
   --main-border-radius: 12px;
@@ -246,7 +246,7 @@ body {
   }
 
   &__excerpt {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   &__date {
@@ -270,7 +270,7 @@ body {
       inset: -12px -13px -15px -13px;
       background-color: #fff;
       border-radius: var(--main-border-radius);
-      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.16));
+      filter: drop-shadow(0 4px 0.875rem rgba(0,0,0,0.16));
       opacity: 0;
       transition: opacity 300ms ease;
       z-index: -1;
@@ -490,8 +490,8 @@ body {
     font-family: 'Material Symbols Outlined';
     display: grid;
     place-items: center;
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     font-size: 24px;
     font-weight: 700;
     border-radius: var(--main-border-radius);
@@ -511,8 +511,8 @@ body {
     font-family: 'Material Symbols Outlined';
     display: grid;
     place-items: center;
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     font-size: 24px;
     font-weight: 700;
     color: #dedede;
@@ -1084,7 +1084,18 @@ body {
 }
 
 .faq {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 4.375rem;
+
+  &-list {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 1.875rem;
+  }
+
   .faq-card {
+    position: relative;
     background-color: #F5F9FF;
     border: 2px solid #979797;
     border-radius: var(--main-border-radius);
@@ -1108,6 +1119,11 @@ body {
 
     &__q {
       padding-left: 8px;
+      font-size: 1.625rem;
+
+      h3 {
+        margin: 0;
+      }
 
       &::before {
         content: 'Q:';
@@ -1115,7 +1131,7 @@ body {
     }
 
     &__a {
-      font-size: 14px;
+      font-size: 0.875rem;
       line-height: 1.75;
 
       &::before {
@@ -1133,6 +1149,12 @@ body {
 
     .read-more {
       align-self: end;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
     }
 
     @include mobile {

@@ -19,7 +19,8 @@ add_filter( 'render_block', function( $block_content, $block ) {
 
 function render_acf_field( $attrs ) {
 	$mapping = array(
-		'success-case-logo' => 'success_case_logo'
+		'success-case-logo' => 'render_success_case_logo',
+		'article-excerpt' => 'render_excerpt'
 	);
 
 
@@ -28,7 +29,7 @@ function render_acf_field( $attrs ) {
 
 add_shortcode( 'omnif', 'render_acf_field' );
 
-function success_case_logo () {
+function render_success_case_logo () {
 	$size = 'large';
 	$img = get_field('success_case_logo');
 	
@@ -47,5 +48,14 @@ function success_case_logo () {
 	</div>
 	<?php
 	endif;
+	return ob_get_clean();
+}
+function render_excerpt () {
+	$content = wp_strip_all_tags(get_the_content(), true);
+	$excerpt = substr($content, 0, 500);
+	ob_start();
+	?>
+	<p><?= $excerpt ?></p>
+	<?php
 	return ob_get_clean();
 }

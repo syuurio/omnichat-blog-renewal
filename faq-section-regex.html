@@ -1,0 +1,41 @@
+<?php
+$content = get_field('faq_content');
+echo esc_html($content);
+if ($content) :
+$q_matches = array();
+$a_matches = array();
+$url_matches = array();
+// Find all matches
+preg_match_all('/<h2>(.*?)<\/h2>/', $content, $q_matches);
+preg_match_all('/<\/h2>\n<p>(.*?)<\/p>/', $content, $a_matches);
+preg_match_all('/href="(.*?)"/', $content, $url_matches);
+
+$questions = $q_matches[1];
+$ans = $a_matches[1];
+$links = $url_matches[1];
+
+// Check if matches were found
+if (!empty($questions)) :
+    foreach ($questions as $i => $q) :
+?>
+<div class="faq-card group-hover">
+  <div class="faq-card__q">
+    <h3 class="text-overflow-lines-4">
+      <?= $q ?>
+    </h3>
+  </div>
+
+  <div class="faq-card__a">
+    <div class="faq-card__a-content">
+      <?= $ans[$i] ?>
+    </div>
+  </div>
+
+
+  <a class="read-more" href="<?= $links[$i] ?>" target="_blank">Read more</a>
+</div>
+<?php 
+		endforeach; 
+	endif; 
+endif; 
+?>
