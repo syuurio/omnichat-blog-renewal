@@ -9,6 +9,7 @@
   --grid-layout-2-1-col: 58% minmax(0, 1fr);
   --grid-layout-gap: 60px;
   --main-border-radius: 12px;
+  --navbar-height: 90px;
 
   @include desktop-md {
     --grid-layout-2-1-col: repeat(2, minmax(0,1fr));
@@ -33,22 +34,64 @@ body {
 
 /* Heading Text Start */
 #section-event {
+  --heading-size: 1.875rem;
+}
+
+#section-portfolio,
+#section-search {
+  --heading-size: 2rem;
+}
+
+#section-cases,
+#section-omni-channel,
+#section-latest-features,
+#section-resources {
+  --heading-size: 1.75rem;
+}
+
+#section-newsletter,
+#section-faq {
+  --heading-size: 2.5rem;
+}
+
+#article {
+  --heading-size: 2.875rem;
+  --cat-text-size: 1.25rem;
+
   .dynamic-title {
-    font-size: 1.875rem;
-    font-weight: 600;
+    line-height: 1.174;
+    font-weight: 400;
   }
 }
 
+
 :lang(zh) {
-  .dynamic-title {
-    > * {
-      font-size: 0.9em !important;
-    }
+  #section-event {
+    --heading-size: 1.75rem;
   }
 
-  #section-event {
+  #section-portfolio {
+    --heading-size: 1.875rem;
+  }
+
+  #section-cases,
+  #section-omni-channel,
+  #section-latest-features,
+  #section-resources {
+    --heading-size: 1.625rem;
+  }
+
+  #section-newsletter,
+  #section-faq {
+    --heading-size: 2.375rem;
+  }
+
+  #article {
+    --heading-size: 2.625rem;
+    --cat-text-size: 1.125rem;
+
     .dynamic-title {
-      font-size: 1.75rem;
+      line-height: revert;
     }
   }
 }
@@ -93,7 +136,7 @@ body {
   }
 }
 
-.page-layout__header:has(#navbar) {
+.wp-site-blocks > header:has(#navbar) {
   position: sticky;
   top: 0;
   z-index: 999;
@@ -101,6 +144,11 @@ body {
   @include desktop-only {
     top: var(--wp-admin--admin-bar--height, 0);
   }
+}
+
+.taxonomy-category,
+.wp-block-post-terms {
+  font-size: inherit;
 }
 /* Global Styles End */
 
@@ -165,16 +213,17 @@ body {
 .dynamic-title {
   // text-wrap: balance;
   letter-spacing: 0.02em;
-  font-size: 1em;
+  font-size: var(--heading-size, 1.875rem);
+  font-weight: 600;
   color: currentColor;
   line-height: 1.35;
   margin-block: 0;
 
   > * {
-    font: inherit;
-    color: inherit;
-    line-height: inherit;
-    margin-block: inherit;
+    font: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+    margin-block: inherit !important;
   }
 
   a {
@@ -219,22 +268,21 @@ body {
     background-color: #d9d9d9;
   }
 
-  &__info {
-    display: grid;
-    grid-auto-flow: row;
-    gap: 12px;
-  }
-
   &__category {
-    font-size: 1rem;
+    @extend .article-categories;
+    font-size: var(--cat-text-size, 1rem);
     font-weight: 700;
     color: #006AFF;
-
-    @extend .article-categories;
 
     a {
       color: inherit;
     }
+  }
+
+  &__info {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 12px;
   }
 
   &__title {
@@ -636,6 +684,8 @@ body {
 }
 
 #navbar {
+  height: var(--navbar-height);
+
   > .alignwide {
     max-width: var(--wp--style--global--content-size);
   }
@@ -964,6 +1014,8 @@ body {
 }
 .omni-channel {
   display: grid;
+  grid-auto-flow: row;
+  gap: 44px;
 
   > * {
     width: 100%;
@@ -972,7 +1024,7 @@ body {
   &__container {
     flex: 1;
     display: grid;
-    grid-template-rows: 1fr max-content;
+    grid-auto-flow: row;
     gap: 70px;
   }
   &__tab-list {
@@ -1086,6 +1138,7 @@ body {
 .faq {
   display: grid;
   grid-auto-flow: row;
+  place-items: center;
   gap: 4.375rem;
 
   &-list {
@@ -1178,5 +1231,56 @@ body {
         }
       }
     }
+  }
+}
+
+.article {
+  // max-width: calc(var(--container-width) + var(--wp--style--root--padding-right) * 2);
+  // margin-inline: auto !important;
+  // padding-inline: var(--wp--style--root--padding-right);
+
+  // @media (width > 1920px) {
+  //   --container-width: 1024px;
+  // }
+
+  // @media (width <= 1920px) {
+  //   --container-width: 882px;
+  // }
+
+  &__header {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 12px;
+    line-height: 1;
+    padding-top: 28px;
+    padding-bottom: 20px;
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    gap: 80px;
+  }
+
+  &__sidebar {
+    position: sticky;
+    top: calc(var(--wp-admin--admin-bar--height, 0) + var(--navbar-height, 90px)) !important;
+    align-self: start;
+  }
+
+  &__category {
+    font-size: var(--cat-text-size, 1.25rem);
+    font-weight: 700;
+    color: #006AFF;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  &__date {
+    font-size: 0.875rem;
+    color: #979797;
+    line-height: 1;
   }
 }
