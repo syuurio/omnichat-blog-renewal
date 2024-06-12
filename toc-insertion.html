@@ -1,0 +1,63 @@
+<?php
+$lang = pll_current_language();
+?>
+
+<div id="toc" class="toc">
+  <h5 class="toc-title">
+    <?= $lang === 'en' ? 'Table of Contents: ' : '目錄: ' ?>
+  </h5>
+  <ul class="toc-list">
+  </ul>
+</div>
+
+<script>
+  const content = document.getElementById("article-content");
+  const headings = [...content.querySelectorAll("h1, h2, h3, h4, h5, h6")];
+  const toc = document.getElementById("toc");
+  const tocList = toc.querySelector(".toc-list");
+  const firstPara = content.querySelector("p");
+
+  if (headings.length > 0) {
+    headings.reduce((result, heading, idx) => {
+      if (!heading.textContent) return result;
+
+      const level = +heading.tagName.slice(1);
+      let tocItem;
+      const tocLink = document.createElement("a");
+      const lastItem = result.at(-1);
+
+      // Create an anchor for the heading
+      const anchorId = heading.id || `heading-${idx + 1}`;
+      heading.id = anchorId;
+
+      tocLink.href = "#" + anchorId;
+      tocLink.textContent = heading.textContent;
+
+      if (lastItem && lastItem.level < level) {
+        tocItem = document.createElement("ul");
+        tocItem.classList.add("toc-list");
+
+        const subItem = document.createElement("li");
+        subItem.appendChild(tocLink);
+        tocItem.appendChild(subItem);
+      } else {
+        tocItem = document.createElement("li");
+        tocItem.appendChild(tocLink);
+      }
+
+      tocList.appendChild(tocItem);
+
+      // tocLink.addEventListener('click', (e) => {
+      //   e.preventDefault();
+      //   const target = document.getElementById(anchorId);
+      //   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // });
+
+      return [
+        ...result,
+        { id: anchorId, text: heading.textContent, level, }
+      ];
+    }, []);
+    firstPara.insertAdjacentElement("afterend", toc);
+  }
+</script>
