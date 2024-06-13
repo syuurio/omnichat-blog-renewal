@@ -31,7 +31,7 @@ add_shortcode( 'omnif', 'render_acf_field' );
 
 function render_success_case_logo () {
 	$size = 'large';
-	$img = get_field('success_case_logo');
+	$img = get_field('company_logo');
 	
 	if ($img) :
 	$imgURL = $img['sizes'][$size];
