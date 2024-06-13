@@ -1,30 +1,32 @@
-<div class="faq-list">
-  <?php
-$show_more_link = get_field('faq_show_more_link');
-
-for ($i = 1; $i <= 3; $i++) :
-  $title = get_field('faq_qa_' . $i . '_title');
-  $content = get_field('faq_qa_' . $i . '_content');
-  $link = get_field('faq_qa_' . $i . '_link');
-
-  if (!empty($title) && !empty($content) && !empty($link)) :
-?>
-  <div class="faq-card group-hover">
-    <div class="faq-card__q">
-      <h3 class="text-overflow-lines-4">
-        <?= esc_html($title) ?>
-      </h3>
-    </div>
-    <div class="faq-card__a">
-      <div class="faq-card__a-content">
-        <?= esc_html($content) ?>
+<div class="faq">
+  <div class="faq-list">
+    <?php
+  $show_more_link = get_field('faq_show_more_link');
+  
+  for ($i = 1; $i <= 3; $i++) :
+    $title = get_field('faq_qa_' . $i . '_title');
+    $content = get_field('faq_qa_' . $i . '_content');
+    $link = get_field('faq_qa_' . $i . '_link');
+  
+    if (!empty($title) && !empty($content) && !empty($link)) :
+  ?>
+    <div class="faq-card group-hover">
+      <div class="faq-card__q">
+        <h3 class="text-overflow-lines-4">
+          <?= esc_html($title) ?>
+        </h3>
       </div>
+      <div class="faq-card__a">
+        <div class="faq-card__a-content">
+          <?= esc_html($content) ?>
+        </div>
+      </div>
+      <a class="read-more" href="<?= esc_url($link) ?>" target="_blank">Read more</a>
     </div>
-    <a class="read-more" href="<?= esc_url($link) ?>" target="_blank">Read more</a>
+    <?php 
+  endif;
+  endfor;
+  ?>
   </div>
-  <?php 
-endif;
-endfor;
-?>
+  <div class="pill-styled-btn"><a href="<?= esc_url($show_more_link) ?>" target="_blank">Show More</a></div>
 </div>
-<div class="pill-styled-btn"><a href="<?= esc_url($show_more_link) ?>" target="_blank">Show More</a></div>

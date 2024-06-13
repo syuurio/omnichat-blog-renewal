@@ -125,9 +125,11 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .taxonomy-category {
+  position: relative;
   font-size: var(--cat-text-size, 1rem);
   color: #006aff;
   font-weight: 700;
+  z-index: 1;
 
   a:hover {
     text-decoration: none;
@@ -1293,6 +1295,7 @@ h1, h2, h3, h4, h5, h6,
     display: grid;
     grid-template-columns: 200px minmax(0, 1fr) 200px;
     gap: 80px;
+    padding-block-end: 120px;
   }
 
   .wp-block-post-content {
@@ -1335,6 +1338,27 @@ h1, h2, h3, h4, h5, h6,
     position: sticky;
     top: calc(var(--scroll-offset) + 1.25rem) !important;
     align-self: start;
+
+    &--right {
+      --ratio: 200/126;
+      --gap: 36px;
+      display: grid;
+      grid-auto-flow: row;
+      gap: var(--gap);
+      place-content: center;
+
+      @media (height < 800px) {
+        --gap: 20px;
+
+        .sticky-item {
+          max-width: 150px !important;
+
+          &__title {
+            --line: 2;
+          }
+        }
+      }
+    }
   }
 
   &__category {
@@ -1357,6 +1381,25 @@ h1, h2, h3, h4, h5, h6,
     --ratio: 628 / 380;
     max-width: 628px;
     margin-inline: auto !important;
+  }
+
+  .sticky-item {
+    position: relative;
+    display: grid;
+    gap: 8px;
+    text-align: center;
+
+    &__title {
+      margin-block: 0;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
   }
 }
 
