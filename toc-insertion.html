@@ -3,9 +3,9 @@ $lang = pll_current_language();
 ?>
 
 <div id="toc" class="toc">
-  <h5 class="toc-title">
+  <div class="toc-title">
     <?= $lang === 'en' ? 'Table of Contents: ' : '目錄: ' ?>
-  </h5>
+  </div>
   <ul class="toc-list">
   </ul>
 </div>
@@ -18,46 +18,39 @@ $lang = pll_current_language();
   const firstPara = content.querySelector("p");
 
   if (headings.length > 0) {
-    headings.reduce((result, heading, idx) => {
-      if (!heading.textContent) return result;
+    headings.reduce((currentGroup, heading, idx) => {
+      if (!heading.textContent) return currentGroup;
 
       const level = +heading.tagName.slice(1);
-      let tocItem;
-      const tocLink = document.createElement("a");
-      const lastItem = result.at(-1);
-
-      // Create an anchor for the heading
       const anchorId = heading.id || `heading-${idx + 1}`;
+      const tocItem = document.createElement("li");
+      const tocLink = document.createElement("a");
       heading.id = anchorId;
-
       tocLink.href = "#" + anchorId;
       tocLink.textContent = heading.textContent;
+      tocItem.appendChild(tocLink);
 
-      if (lastItem && lastItem.level < level) {
-        tocItem = document.createElement("ul");
-        tocItem.classList.add("toc-list");
+      if (currentGroup.level === level) {
+        currentGroup.element.appendChild(tocItem);
+      } else if (currentGroup.level < level) {
+        const element = document.createElement("ul");
+        element.appendChild(tocItem);
+        currentGroup.element.appendChild(element);
 
-        const subItem = document.createElement("li");
-        subItem.appendChild(tocLink);
-        tocItem.appendChild(subItem);
+        currentGroup = {
+          level: level,
+          element,
+          parent: currentGroup
+        }
       } else {
-        tocItem = document.createElement("li");
-        tocItem.appendChild(tocLink);
+        currentGroup.parent.element.appendChild(tocItem);
+        currentGroup = currentGroup.parent;
       }
 
-      tocList.appendChild(tocItem);
+      return currentGroup;
+    }, { level: 0, element: tocList, parent: null });
 
-      // tocLink.addEventListener('click', (e) => {
-      //   e.preventDefault();
-      //   const target = document.getElementById(anchorId);
-      //   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // });
-
-      return [
-        ...result,
-        { id: anchorId, text: heading.textContent, level, }
-      ];
-    }, []);
+    toc.appendChild(tocList);
     firstPara.insertAdjacentElement("afterend", toc);
   }
 </script>
