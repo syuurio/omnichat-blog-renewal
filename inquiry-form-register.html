@@ -1,0 +1,184 @@
+<?php
+$lang = pll_current_language();
+$forms = array(
+	'en' => 'fb062923-0660-43da-8ad4-2863fd2c6eb4',
+	'tw' => 'ec035834-19ed-43e1-bce0-ecd68bd74d6c',
+	'hk' => '6bd6890b-6f6d-4084-a7a6-32d4e84c616c'
+);
+$portalID = "4971687";
+$region = "na1";
+?>
+<style id="hsform-styles">
+  p {
+    margin-block: 0;
+  }
+
+  .hbspt-form {
+    padding-block-start: 20px;
+    padding-inline: 20px;
+    font-family: Outfit, Inter, 'Noto Sans TC', sans-serif;
+    color: #2e2e2e;
+    letter-spacing: 0.04em !important;
+    line-height: 1.4;
+
+    @media (width <=768px) {}
+  }
+
+
+  .hbspt-form form {
+    margin-block-end: 0;
+  }
+
+  .hs-input:not([type=checkbox], [type=radio]) {
+    min-height: 50px !important;
+    background-color: #fff !important;
+    border-color: transparent !important;
+    border-radius: 12px !important;
+    letter-spacing: inherit;
+    color: currentColor;
+    font: inherit !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  }
+
+  .hs-input::placeholder {
+    color: #979797;
+  }
+
+  .hs-input[type=checkbox],
+  .hs-input[type=radio] {
+    margin: 0;
+  }
+
+  .hs-input[type=radio] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    border: 1px solid currentColor;
+  }
+
+  .hs-form-field {
+    margin-block-end: 0;
+  }
+
+  .hs-form-field>label {
+    display: none;
+  }
+
+  .hs-form-field+.hs-form-field {
+    margin-block-start: 20px;
+  }
+
+  .hs-form-field.hs-fieldtype-radio {
+    margin-block-start: 28px;
+    max-width: 460px;
+    margin-inline: auto;
+  }
+
+  .inputs-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .hs-form-radio label {
+    position: relative;
+    margin-block-end: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: inherit !important;
+    cursor: pointer;
+  }
+
+  .hs-form-radio label:has(input:checked)::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background-color: #006AFF;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    translate: 0 -50%;
+  }
+
+  .hs-form-field label:not(.hs-error-msg) {
+    color: currentColor !important;
+  }
+
+  .inputs-list {
+    padding: 0 !important;
+    display: grid;
+    grid-auto-flow: row;
+    gap: 8px;
+  }
+
+  .hs-submit {
+    max-width: 460px;
+    margin-block-start: 24px;
+    margin-inline: auto;
+  }
+
+  .hs-submit .actions {
+    margin-block-start: 20px;
+    margin-block-end: 0;
+    padding-block: 0;
+    text-align: center !important;
+  }
+
+  .hs-submit .hs-button {
+    width: 100%;
+    max-width: 288px;
+    height: 60px;
+    border-radius: 12px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: inherit !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    background-color: #006AFF !important;
+    color: #fff !important;
+  }
+</style>
+<div id="form" class="inquiry-form" style="visibility: hidden;">
+  <p class="inquiry-form__title dynamic-title font-outfit">
+    <?= $lang === 'en' ? 'Book a Consultation' : '立即填表預約諮詢' ?>
+  </p>
+
+  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script>
+    hbspt.forms.create({
+      region: "<?= $region ?>",
+      portalId: "<?= $portalID ?>",
+      formId: "<?= $forms[$lang] ?>"
+    });
+
+    window.addEventListener('load', () => {
+      const iframe = document.querySelector('.hs-form-iframe');
+      const style = document.getElementById('hsform-styles');
+      const iDocument = iframe.contentDocument;
+      iDocument.documentElement.lang = '<?= $lang ?>';
+      iDocument.head.insertAdjacentElement('beforeend', style);
+
+      const fields = iDocument.querySelectorAll('.hs-form-field:not(.hs-fieldtype-radio)');
+      fields.forEach(field => {
+        const label = field.querySelector('label').children[0];
+        const input = field.querySelector('input');
+        input.setAttribute('placeholder', label.textContent);
+      });
+      const radioField = iDocument.querySelector('.hs-fieldtype-radio');
+      const radioGroupTitle = document.createElement('p');
+      radioGroupTitle.style = 'font-size: 18px; color:#1c1c1c; margin-block-end: 10px;';
+      radioGroupTitle.textContent = '<?= $lang === "en" ? "Main business markets" : "主要經營市場" ?>';
+      radioField.insertAdjacentElement('afterbegin', radioGroupTitle);
+
+      const footerText = iDocument.createElement('p');
+      const submit = iDocument.querySelector('.hs-submit')
+      footerText.style = 'font-size: 10px; color:#979797; text-align: center;';
+      footerText.textContent = 'We’ll share a copy of this guide and send you content and updates about Omnichat’s products as we continue to build the world’s leading CDP.  We use your information according to our privacy policy. You can update your preferences at any time.';
+      submit.insertAdjacentElement('afterbegin', footerText);
+
+      document.getElementById('form').style.visibility = 'visible';
+    })
+  </script>
+</div>
