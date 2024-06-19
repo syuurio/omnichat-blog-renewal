@@ -1,0 +1,202 @@
+<?php
+$lang = pll_current_language();
+$lang_suffix = array(
+  'en' => 'Global',
+  'tw' => 'TW',
+  'hk' => 'HK'
+);
+$menu_name = 'Menu ' . $lang_suffix[$lang];
+$official_site_url = array(
+  'en' => 'https://www.omnichat.ai/',
+  'tw' => 'https://www.omnichat.ai/tw/',
+  'hk' => 'https://www.omnichat.ai/zh-hk/'
+);
+?>
+
+<div class="navbar font-outfit" id="navbar">
+  <div class="navbar__container">
+    <div class="navbar__logo">
+      <div class="logo">
+        <a href="/" rel="home" aria-current="page">
+          <img width="176" height="50"
+            src="https://i0.wp.com/staging-cdcd-easychatblog.wpcomstaging.com/wp-content/uploads/2024/05/omnichat_logo.png?fit=352%2C100&amp;ssl=1"
+            class="custom-logo" alt="Omnichat Blog" decoding="async"
+            srcset="https://i0.wp.com/staging-cdcd-easychatblog.wpcomstaging.com/wp-content/uploads/2024/05/omnichat_logo.png?w=352&amp;ssl=1 352w, https://i0.wp.com/staging-cdcd-easychatblog.wpcomstaging.com/wp-content/uploads/2024/05/omnichat_logo.png?resize=300%2C85&amp;ssl=1 300w"
+            sizes="(max-width: 176px) 100vw, 176px" data-attachment-id="17446"
+            data-permalink="https://staging-cdcd-easychatblog.wpcomstaging.com/the-title-can-display-up-to-3-lines-beautystage-promotes-e-beauty-consultant-omo-services/omnichat_logo/"
+            data-orig-file="https://i0.wp.com/staging-cdcd-easychatblog.wpcomstaging.com/wp-content/uploads/2024/05/omnichat_logo.png?fit=352%2C100&amp;ssl=1"
+            data-orig-size="352,100" data-comments-opened="0"
+            data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}"
+            data-image-title="omnichat_logo" data-image-description="" data-image-caption=""
+            data-medium-file="https://i0.wp.com/staging-cdcd-easychatblog.wpcomstaging.com/wp-content/uploads/2024/05/omnichat_logo.png?fit=300%2C85&amp;ssl=1"
+            data-large-file="https://i0.wp.com/staging-cdcd-easychatblog.wpcomstaging.com/wp-content/uploads/2024/05/omnichat_logo.png?fit=352%2C100&amp;ssl=1"></a>
+      </div>
+      <span>Blog</span>
+    </div>
+    <div class="navbar__menu">
+      <div class="menu">
+        <?= wp_nav_menu(array('menu' => $menu_name)) ?>
+        <a class="menu-item navbar__icon navbar__search" href="/#section-search-post">
+          <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.8837" cy="9.88368" r="8.88368" stroke="currentColor" stroke-width="2" />
+            <line x1="16.7071" y1="15.7929" x2="24.2071" y2="23.2929" stroke="currentColor" stroke-width="2" />
+          </svg>
+          <span>Search Post</span>
+        </a>
+        <div class="menu-item">
+          <button class="navbar__icon navbar__lang font-outfit">
+            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_77_182)">
+                <path
+                  d="M12.7838 21.6942C7.46545 21.6942 3.13857 17.3319 3.13857 11.972C3.13857 8.43057 5.02776 5.32479 7.84347 3.62505C7.95042 3.70426 8.08473 3.75817 8.25602 3.75817C8.25602 3.75817 8.44103 3.75817 7.25912 4.68885C6.0766 5.62066 6.18683 6.91238 6.55614 6.09933C6.92628 5.28514 7.25912 5.58338 6.6676 6.73857C6.0766 7.89387 6.97863 7.52075 7.28422 8.22815C7.59135 8.93566 7.7022 8.07965 7.84951 9.42083C7.84951 9.42083 8.22047 9.86748 8.88462 9.6441C9.5498 9.42083 8.77388 10.2392 8.07172 10.9104C7.36935 11.5815 7.59074 11.8037 7.96087 12.214C8.33019 12.6244 8.47863 12.9588 8.14579 13.4065C7.81356 13.8532 8.66303 14.0018 8.88462 14.2625C9.10631 14.5232 9.06902 15.3804 8.55219 15.7533C8.03555 16.1251 8.81086 16.9447 8.69919 18.0999C8.58835 19.2539 8.6156 19.7381 9.13787 19.8128C9.66054 19.8876 9.06902 18.8072 9.29071 18.3232C9.51271 17.8392 9.772 18.6587 10.2888 17.3549C10.2888 17.3549 11.2134 17.5784 11.6183 16.1626C11.6183 16.1626 12.4314 16.0503 12.5797 15.6037C12.7281 15.157 12.5426 14.8589 13.7245 13.8906C14.9065 12.9214 12.9116 12.1766 11.8409 12.1393C11.8409 12.1393 11.448 12.301 12.1365 11.0589C12.4367 10.5165 11.545 10.6496 11.3236 10.1656C11.1019 9.68138 10.5848 9.12269 9.5498 9.23381C8.5151 9.34586 8.21842 9.71898 8.18287 9.0851C8.14579 8.45143 8.62543 8.15442 8.10819 8.07965C7.59135 8.00468 7.84951 7.9674 8.40507 7.44588C8.40507 7.44588 8.07172 7.22147 7.73918 7.55813C7.40634 7.89387 6.81482 7.37214 7.51728 6.62745C8.22047 5.88153 9.3278 5.32252 9.25404 6.73857C9.18038 8.15442 9.69763 6.09932 9.69763 6.09932C9.69763 6.09932 10.4736 5.09925 11.4348 5.02551C12.3942 4.95085 11.8038 4.91336 11.8038 4.57773C11.8038 4.24344 12.2469 5.13663 12.7838 4.91336C13.3186 4.68885 12.2098 4.61532 12.3211 4.24344C12.4314 3.87043 13.061 3.98155 13.3186 4.46671C13.5772 4.95085 13.8731 4.20595 13.2083 3.42275C12.5426 2.6415 12.654 3.12564 12.0254 3.46003C11.3977 3.79545 11.6565 3.98155 11.545 3.42275C11.4348 2.86488 11.3977 3.46003 11.1019 3.16302C10.8053 2.86488 11.6292 3.00233 12.0625 3.05076C12.4958 3.09796 12.3582 2.7899 12.3582 2.7899L12.7838 2.60412C12.7838 2.60412 13.061 3.01338 13.3928 2.93861C13.7245 2.86488 13.1712 2.34232 13.503 2.41709C13.8359 2.49176 14.279 2.19382 14.3162 2.6415C14.3532 3.08804 14.0574 3.68443 15.2775 3.01338C15.5243 2.87809 15.689 2.7899 15.8013 2.73723C15.8844 2.76481 15.9651 2.79341 16.0469 2.82408C16.0546 2.91321 16.0829 3.02887 16.238 3.12564C16.7182 3.42275 16.5709 3.16188 17.1984 3.535C17.8271 3.90791 17.42 4.31718 17.9001 4.39184C18.3804 4.46671 18.8245 5.13663 18.4558 5.17402C18.0856 5.2114 18.0485 4.76496 17.4952 4.68885C16.9397 4.61532 17.7169 4.87484 18.0856 5.2114C18.4558 5.546 18.4558 5.94328 18.0856 6.09932C17.7169 6.25464 17.9897 7.11148 18.592 6.99933C19.1946 6.88708 18.9719 6.25464 19.3045 6.40398C19.6377 6.55248 19.5262 6.92446 20.0808 7.14876C20.6362 7.37214 20.0065 7.66915 20.6724 7.70653C21.338 7.74412 21.6697 8.00468 21.0782 8.26554C20.4869 8.52743 20.7834 8.74957 20.2651 8.1159C19.7479 7.48347 19.7991 8.08956 19.7479 7.48347C19.6976 6.87716 18.8618 7.44588 18.4185 7.52075C17.9745 7.59541 18.3443 8.04216 17.9372 8.1159C17.5302 8.19087 17.3459 8.07965 17.4569 9.04771C17.5673 10.0172 17.3097 10.2392 16.8654 10.2392C16.4223 10.2392 17.2365 10.7608 17.4569 11.4318C17.6786 12.1019 17.7169 12.512 18.6773 12.2516C19.6377 11.9907 19.3417 11.9907 19.4531 12.512C19.5633 13.0337 19.9704 12.214 20.0437 12.7355C20.1178 13.2569 19.1202 13.3692 19.6735 13.7036C20.2281 14.0382 19.8232 14.8214 19.5633 15.0074C19.3045 15.1943 19.4892 15.8633 18.9358 16.1626C18.3804 16.4607 19.1946 16.9809 18.8618 17.3177C18.5298 17.6531 17.6416 18.0624 17.9745 18.8822C18.3083 19.7006 18.3083 19.2165 19.01 18.6202C19.7107 18.0251 20.3034 17.0195 20.6362 17.0569C20.7552 17.0702 20.8119 17.1636 20.8827 17.2429C19.1619 19.9196 16.1746 21.6942 12.7838 21.6942ZM12.7839 0.603516C6.51419 0.603516 1.41455 5.70306 1.41455 11.9721C1.41455 18.2394 6.51419 23.3404 12.7839 23.3404C19.0516 23.3404 24.1514 18.2394 24.1514 11.9721C24.1514 5.70306 19.0516 0.603516 12.7839 0.603516Z"
+                  fill="currentColor" />
+              </g>
+              <defs>
+                <clipPath id="clip0_77_182">
+                  <rect width="24" height="24" fill="white" transform="translate(0.783203)" />
+                </clipPath>
+              </defs>
+            </svg>
+            <span>Languages</span>
+          </button>
+          <ul class="sub-menu lang-menu" aria-expanded="false">
+            <?php pll_the_languages(); ?>
+          </ul>
+        </div>
+      </div>
+      <button class="navbar__menu--toggle alt-text" aria-pressed="false" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="official-site"><a href="<?= $official_site_url[$lang] ?>" target="_blank" rel="noreferrer noopener">
+        <?= $lang === 'en' ? 'omnichat.ai' : '官方網站' ?>
+      </a></div>
+    <button class="navbar__menu--toggle trigger alt-text" aria-pressed="false" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const mm = window.matchMedia('(width <= 1024px)');
+  mm.addEventListener('change', onBreakpointChanged);
+  onBreakpointChanged(mm);
+
+  function onBreakpointChanged(e) {
+    const isMobile = e.matches;
+    const nav = document.getElementById('navbar');
+    const menu = nav.querySelector('.navbar__menu');
+    const menuItems = nav.querySelectorAll('a.menu-item');
+    const menuToggle = nav.querySelectorAll('.navbar__menu--toggle');
+    const dropdownItems = nav.querySelectorAll('.menu-item:has(.sub-menu)');
+
+    // init nav menu state
+    nav.setAttribute('aria-expanded', 'false');
+
+    if (isMobile) {
+      // cleanup event listener from dekstop
+      dropdownItems.forEach(el => {
+        el.onpointerenter = null;
+        el.onpointerleave = null;
+      })
+
+      menuItems.forEach(el => {
+        el.onclick = () => toggleMenu(false)
+      })
+      menuToggle.forEach(el => {
+        el.onclick = (e) => toggleMenu()
+      })
+    } else {
+      // cleanup event listener from mobile
+      menuItems.forEach(el => (el.onclick = null));
+      menuToggle.forEach(el => (el.onclick = null));
+
+      dropdownItems.forEach(el => {
+        el.onpointerenter = () => toggleDropdown(el, true);
+        el.onpointerleave = () => toggleDropdown(el, false);
+      })
+    }
+
+    function toggleDropdown(el, state) {
+      if (isMobile) return;
+
+      const subMenu = el.querySelector('.sub-menu');
+
+      if (state) subMenu.setAttribute('aria-expanded', 'true');
+
+      const keyframes = [
+        { opacity: 0, transform: 'translateY(-10px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ]
+      const animation = subMenu.animate(state ? keyframes : keyframes.reverse(), {
+        duration: 250,
+        easing: 'ease-out',
+        fill: 'forwards'
+      })
+
+      // clear keyframes effects
+      animation.onfinish = () => {
+        if (!state) subMenu.setAttribute('aria-expanded', 'false');
+        animation.cancel();
+      }
+    }
+
+    function toggleMenu(state) {
+      if (!isMobile) return;
+
+      const isOpen = nav.getAttribute('aria-expanded') === 'true';
+      const nextStateShouldOpen = state ?? !isOpen;
+
+      nav.setAttribute('aria-expanded', nextStateShouldOpen ? 'true' : 'false');
+
+      const keyframes = [
+        { opacity: 0, display: 'none' },
+        { opacity: 1, display: 'block' }
+      ]
+
+      const animation = menu.animate(nextStateShouldOpen ? keyframes : keyframes.reverse(), {
+        duration: 200,
+        fill: 'forwards'
+      });
+
+      // clear keyframes effects
+      animation.onfinish = animation.cancel
+    }
+  }
+
+
+  const dropdownElements = document.querySelectorAll('#navbar .sub-menu');
+  const observeAttribute = 'aria-expanded';
+
+  dropdownElements.forEach(el => {
+    const observer = new MutationObserver((mutationList) => {
+      for (const { attributeName, target } of mutationList) {
+        if (attributeName === observeAttribute) {
+          const isOpen = target.getAttribute(attributeName) === 'true';
+
+          if (isOpen) {
+            const { width, right } = el.getBoundingClientRect();
+
+            if (right > window.innerWidth) {
+              el.style = `left: auto; right: 0;`;
+            } else {
+              el.style = `left: 50%; translate: -50%;`;
+            }
+          } else {
+            el.style = '';
+          }
+
+          if (el.childElementCount > 10) {
+            el.style.setProperty('--col', 2);
+          }
+        }
+      }
+    });
+    observer.observe(el, { subtree: true, attributeFilter: [observeAttribute] });
+
+  })
+</script>
