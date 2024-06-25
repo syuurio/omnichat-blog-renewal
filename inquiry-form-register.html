@@ -153,11 +153,14 @@ $region = "na1";
       formId: "<?= $forms[$lang] ?>"
     });
 
-    window.addEventListener('load', () => {
+    // hsFormsOnReady.push(customizeFormStyles)
+    HubSpotForms.onFormReady((e) => customizeFormStyles());
+
+    function customizeFormStyles() {
       const iframe = document.querySelector('.hs-form-iframe');
       const style = document.getElementById('hsform-styles');
       style.innerHTML = `
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Noto+Sans+TC:wght@100..900&family=Outfit&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Noto+Sans+TC:wght@100..900&family=Outfit:wght@400;700&display=swap');
       ${style.innerHTML}
       `
       const iDocument = iframe.contentDocument;
@@ -183,6 +186,6 @@ $region = "na1";
       submit.insertAdjacentElement('afterbegin', footerText);
 
       document.getElementById('form').style.visibility = 'visible';
-    })
+    }
   </script>
 </div>
