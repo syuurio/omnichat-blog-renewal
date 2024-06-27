@@ -26,12 +26,13 @@ if ($is_solution) {
 	if ($solution_type) {
     $args = array(
       'post_type' => 'wp_block',
-       'tax_query' => array(
+      'numberposts' => -1,
+      'tax_query' => array(
         array(
           'taxonomy' => 'wp_pattern_category',
           'field' => 'slug',
           'terms' => 'solutions',
-        ),
+        )
       ),
     );
   
