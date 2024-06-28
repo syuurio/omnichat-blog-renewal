@@ -1,4 +1,6 @@
 <?php
+$lang = pll_current_language();
+
 if (get_field('pickup_event_show_event')) :
 $event = get_field('pickup_event_info');
 $eventTitle = $event['title'];
@@ -32,7 +34,9 @@ $alt = $img['alt'] ? $img['alt'] : $eventTitle . ' Image';
       </p>
     </div>
     <div class="read-more">
-      <a href="<?= esc_url($eventLink) ?>" target="_blank">Read more</a>
+      <a href="<?= esc_url($eventLink) ?>" target="_blank">
+        <?= $lang === 'en' ? 'Learn more' : '暸解更多' ?>
+      </a>
     </div>
   </div>
 </div>

@@ -82,121 +82,122 @@ $official_site_url = array(
 </div>
 
 <script>
-  const mm = window.matchMedia('(width <= 1024px)');
-  mm.addEventListener('change', onBreakpointChanged);
-  onBreakpointChanged(mm);
+  (() => {
+    const mm = window.matchMedia('(width <= 1024px)');
+    mm.addEventListener('change', onBreakpointChanged);
+    onBreakpointChanged(mm);
 
-  function onBreakpointChanged(e) {
-    const isMobile = e.matches;
-    const nav = document.getElementById('navbar');
-    const menu = nav.querySelector('.navbar__menu');
-    const menuItems = nav.querySelectorAll('a.menu-item');
-    const menuToggle = nav.querySelectorAll('.navbar__menu--toggle');
-    const dropdownItems = nav.querySelectorAll('.menu-item:has(.sub-menu)');
+    function onBreakpointChanged(e) {
+      const isMobile = e.matches;
+      const nav = document.getElementById('navbar');
+      const menu = nav.querySelector('.navbar__menu');
+      const menuItems = nav.querySelectorAll('a.menu-item');
+      const menuToggle = nav.querySelectorAll('.navbar__menu--toggle');
+      const dropdownItems = nav.querySelectorAll('.menu-item:has(.sub-menu)');
 
-    // init nav menu state
-    nav.setAttribute('aria-expanded', 'false');
+      // init nav menu state
+      nav.setAttribute('aria-expanded', 'false');
 
-    if (isMobile) {
-      // cleanup event listener from dekstop
-      dropdownItems.forEach(el => {
-        el.onpointerenter = null;
-        el.onpointerleave = null;
-      })
+      if (isMobile) {
+        // cleanup event listener from dekstop
+        dropdownItems.forEach(el => {
+          el.onpointerenter = null;
+          el.onpointerleave = null;
+        })
 
-      menuItems.forEach(el => {
-        el.onclick = () => toggleMenu(false)
-      })
-      menuToggle.forEach(el => {
-        el.onclick = (e) => toggleMenu()
-      })
-    } else {
-      // cleanup event listener from mobile
-      menuItems.forEach(el => (el.onclick = null));
-      menuToggle.forEach(el => (el.onclick = null));
+        menuItems.forEach(el => {
+          el.onclick = () => toggleMenu(false)
+        })
+        menuToggle.forEach(el => {
+          el.onclick = (e) => toggleMenu()
+        })
+      } else {
+        // cleanup event listener from mobile
+        menuItems.forEach(el => (el.onclick = null));
+        menuToggle.forEach(el => (el.onclick = null));
 
-      dropdownItems.forEach(el => {
-        el.onpointerenter = () => toggleDropdown(el, true);
-        el.onpointerleave = () => toggleDropdown(el, false);
-      })
-    }
-
-    function toggleDropdown(el, state) {
-      if (isMobile) return;
-
-      const subMenu = el.querySelector('.sub-menu');
-
-      if (state) subMenu.setAttribute('aria-expanded', 'true');
-
-      const keyframes = [
-        { opacity: 0, transform: 'translateY(-10px)' },
-        { opacity: 1, transform: 'translateY(0)' }
-      ]
-      const animation = subMenu.animate(state ? keyframes : keyframes.reverse(), {
-        duration: 250,
-        easing: 'ease-out',
-        fill: 'forwards'
-      })
-
-      // clear keyframes effects
-      animation.onfinish = () => {
-        if (!state) subMenu.setAttribute('aria-expanded', 'false');
-        animation.cancel();
+        dropdownItems.forEach(el => {
+          el.onpointerenter = () => toggleDropdown(el, true);
+          el.onpointerleave = () => toggleDropdown(el, false);
+        })
       }
-    }
 
-    function toggleMenu(state) {
-      if (!isMobile) return;
+      function toggleDropdown(el, state) {
+        if (isMobile) return;
 
-      const isOpen = nav.getAttribute('aria-expanded') === 'true';
-      const nextStateShouldOpen = state ?? !isOpen;
+        const subMenu = el.querySelector('.sub-menu');
 
-      nav.setAttribute('aria-expanded', nextStateShouldOpen ? 'true' : 'false');
+        if (state) subMenu.setAttribute('aria-expanded', 'true');
 
-      const keyframes = [
-        { opacity: 0, display: 'none' },
-        { opacity: 1, display: 'block' }
-      ]
+        const keyframes = [
+          { opacity: 0, transform: 'translateY(-10px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ]
+        const animation = subMenu.animate(state ? keyframes : keyframes.reverse(), {
+          duration: 250,
+          easing: 'ease-out',
+          fill: 'forwards'
+        })
 
-      const animation = menu.animate(nextStateShouldOpen ? keyframes : keyframes.reverse(), {
-        duration: 200,
-        fill: 'forwards'
-      });
-
-      // clear keyframes effects
-      animation.onfinish = animation.cancel
-    }
-  }
-
-
-  const dropdownElements = document.querySelectorAll('#navbar .sub-menu');
-  const observeAttribute = 'aria-expanded';
-
-  dropdownElements.forEach(el => {
-    const observer = new MutationObserver((mutationList) => {
-      for (const { attributeName, target } of mutationList) {
-        if (attributeName === observeAttribute) {
-          const isOpen = target.getAttribute(attributeName) === 'true';
-
-          if (isOpen) {
-            const { width, right } = el.getBoundingClientRect();
-
-            if (right > window.innerWidth) {
-              el.style = `left: auto; right: 0;`;
-            } else {
-              el.style = `left: 50%; translate: -50%;`;
-            }
-          } else {
-            el.style = '';
-          }
-
-          if (el.childElementCount > 10) {
-            el.style.setProperty('--col', 2);
-          }
+        // clear keyframes effects
+        animation.onfinish = () => {
+          if (!state) subMenu.setAttribute('aria-expanded', 'false');
+          animation.cancel();
         }
       }
-    });
-    observer.observe(el, { subtree: true, attributeFilter: [observeAttribute] });
 
-  })
+      function toggleMenu(state) {
+        if (!isMobile) return;
+
+        const isOpen = nav.getAttribute('aria-expanded') === 'true';
+        const nextStateShouldOpen = state ?? !isOpen;
+
+        nav.setAttribute('aria-expanded', nextStateShouldOpen ? 'true' : 'false');
+
+        const keyframes = [
+          { opacity: 0, display: 'none' },
+          { opacity: 1, display: 'block' }
+        ]
+
+        const animation = menu.animate(nextStateShouldOpen ? keyframes : keyframes.reverse(), {
+          duration: 200,
+          fill: 'forwards'
+        });
+
+        // clear keyframes effects
+        animation.onfinish = animation.cancel
+      }
+    }
+
+
+    const dropdownElements = document.querySelectorAll('#navbar .sub-menu');
+    const observeAttribute = 'aria-expanded';
+
+    dropdownElements.forEach(el => {
+      const observer = new MutationObserver((mutationList) => {
+        for (const { attributeName, target } of mutationList) {
+          if (attributeName === observeAttribute) {
+            const isOpen = target.getAttribute(attributeName) === 'true';
+
+            if (isOpen) {
+              const { width, right } = el.getBoundingClientRect();
+
+              if (right > window.innerWidth) {
+                el.style = `left: auto; right: 0;`;
+              } else {
+                el.style = `left: 50%; translate: -50%;`;
+              }
+            } else {
+              el.style = '';
+            }
+
+            if (el.childElementCount > 10) {
+              el.style.setProperty('--col', 2);
+            }
+          }
+        }
+      });
+      observer.observe(el, { subtree: true, attributeFilter: [observeAttribute] });
+    })
+  })()
 </script>

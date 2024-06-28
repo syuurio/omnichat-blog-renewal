@@ -97,34 +97,36 @@
 </div>
 
 <script>
-	const tabs = document.querySelectorAll('.omni-channel__tab')
-	tabs.forEach(el => {
-		el.addEventListener('click', () => {
-			tabs.forEach(tab => {
-				if (tab !== el) {
-					tab.classList.remove('active')
-				} else {
-					tab.classList.add('active')
-				}
+	(() => {
+		const tabs = document.querySelectorAll('.omni-channel__tab')
+		tabs.forEach(el => {
+			el.addEventListener('click', () => {
+				tabs.forEach(tab => {
+					if (tab !== el) {
+						tab.classList.remove('active')
+					} else {
+						tab.classList.add('active')
+					}
+				})
 			})
 		})
-	})
 
-	const observer = new MutationObserver((mutationList) => {
-		for (const { target, attributeName } of mutationList) {
-			if (attributeName === 'class') {
-				const tabId = target.dataset.tab
-				const tabContent = document.querySelector(`.omni-channel__tab-content[data-tab-content="${tabId}"]`)
-				if (target.classList.contains('active')) {
-					tabContent.classList.add('active')
-				} else {
-					tabContent.classList.remove('active')
+		const observer = new MutationObserver((mutationList) => {
+			for (const { target, attributeName } of mutationList) {
+				if (attributeName === 'class') {
+					const tabId = target.dataset.tab
+					const tabContent = document.querySelector(`.omni-channel__tab-content[data-tab-content="${tabId}"]`)
+					if (target.classList.contains('active')) {
+						tabContent.classList.add('active')
+					} else {
+						tabContent.classList.remove('active')
+					}
 				}
 			}
-		}
-	})
-	observer.observe(document.querySelector('.omni-channel__tab-list'), {
-		subtree: true,
-		attributeFilter: ['class']
-	})
+		})
+		observer.observe(document.querySelector('.omni-channel__tab-list'), {
+			subtree: true,
+			attributeFilter: ['class']
+		})
+	})()
 </script>

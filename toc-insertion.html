@@ -6,53 +6,76 @@ $lang = pll_current_language();
   <div class="toc-title dynamic-title">
     <?= $lang === 'en' ? 'Table of Contents: ' : '目錄: ' ?>
   </div>
-  <div class="toc-list">
-  </div>
 </div>
+<button class="back-to-toc">
+  <svg width="32" height="37" viewBox="0 0 32 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M0 8C0 3.58172 3.58172 0 8 0H24C28.4183 0 32 3.58172 32 8V29C32 33.4183 28.4183 37 24 37H8C3.58172 37 0 33.4183 0 29V8Z"
+      fill="currentColor" />
+    <circle cx="6.5" cy="10.5" r="1.5" fill="white" />
+    <rect x="11" y="9" width="16" height="3" rx="1.5" fill="white" />
+    <circle cx="6.5" cy="18.5" r="1.5" fill="white" />
+    <circle cx="6.5" cy="26.5" r="1.5" fill="white" />
+    <rect x="11" y="17" width="16" height="3" rx="1.5" fill="white" />
+    <rect x="11" y="25" width="16" height="3" rx="1.5" fill="white" />
+  </svg>
+</button>
 
 <script>
-  window.addEventListener('load', () => {
-    const content = document.getElementById("article-content");
-    const headings = [...content.querySelectorAll("h1, h2, h3, h4, h5, h6")];
-    const toc = document.getElementById("toc");
-    const tocList = toc.querySelector(".toc-list");
-    // const firstPara = content.querySelector("p");
+  (() => {
+    const sidebar = document.querySelector('.article__sidebar--left');
+    const backToToc = document.querySelector('.back-to-toc');
+    backToToc.addEventListener('click', () => {
+      const toc = document.getElementById("toc");
+      toc.scrollIntoView({ behavior: 'smooth' });
+    });
 
-    if (headings.length > 0) {
-      headings.reduce((currentGroup, heading, idx) => {
-        if (!heading.textContent) return currentGroup;
+    sidebar.appendChild(backToToc);
 
-        const level = +heading.tagName.slice(1);
-        const anchorId = heading.id || `heading-${idx + 1}`;
-        const tocItem = document.createElement("li");
-        const tocLink = document.createElement("a");
-        heading.id = anchorId;
-        tocLink.href = "#" + anchorId;
-        tocLink.textContent = heading.textContent;
-        tocItem.appendChild(tocLink);
+    window.addEventListener('load', () => {
+      const content = document.getElementById("article-content");
+      const headings = [...content.querySelectorAll("h1, h2, h3, h4, h5, h6")];
+      const toc = document.getElementById("toc");
+      const tocList = document.createElement('ul');
+      tocList.classList.add('toc-list')
+      // const firstPara = content.querySelector("p");
 
-        if (currentGroup.level === level) {
-          currentGroup.element.appendChild(tocItem);
-        } else if (currentGroup.level < level) {
-          const element = document.createElement("ul");
-          element.appendChild(tocItem);
-          currentGroup.element.appendChild(element);
+      if (headings.length > 0) {
+        headings.reduce((currentGroup, heading, idx) => {
+          if (!heading.textContent) return currentGroup;
 
-          currentGroup = {
-            level: level,
-            element,
-            parent: currentGroup
+          const level = +heading.tagName.slice(1);
+          const anchorId = heading.id || `heading-${idx + 1}`;
+          const tocItem = document.createElement("li");
+          const tocLink = document.createElement("a");
+          heading.id = anchorId;
+          tocLink.href = "#" + anchorId;
+          tocLink.textContent = heading.textContent;
+          tocItem.appendChild(tocLink);
+
+          if (currentGroup.level === level) {
+            currentGroup.element.appendChild(tocItem);
+          } else if (currentGroup.level < level) {
+            const element = document.createElement("ul");
+            element.appendChild(tocItem);
+            currentGroup.element.appendChild(element);
+
+            currentGroup = {
+              level: level,
+              element,
+              parent: currentGroup
+            }
+          } else {
+            currentGroup.parent.element.appendChild(tocItem);
+            currentGroup = currentGroup.parent;
           }
-        } else {
-          currentGroup.parent.element.appendChild(tocItem);
-          currentGroup = currentGroup.parent;
-        }
 
-        return currentGroup;
-      }, { level: 0, element: tocList, parent: null });
+          return currentGroup;
+        }, { level: +headings[0].tagName.slice(1), element: tocList, parent: null });
 
-      toc.appendChild(tocList);
-      // firstPara.insertAdjacentElement("afterend", toc);
-    }
-  })
+        toc.appendChild(tocList);
+        // firstPara.insertAdjacentElement("afterend", toc);
+      }
+    })
+  })()
 </script>
