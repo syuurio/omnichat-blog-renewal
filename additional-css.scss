@@ -789,19 +789,39 @@ body {
   }
 
   .wp-block-query-pagination-numbers {
+    // display: none;
     grid-column: 2 / 3;
     display: grid;
     grid-auto-flow: column;
     gap: 10px;
     align-items: center;
 
-
-    &::after {
+    &::before {
       content: '|';
       grid-column: 2 / 3;
       font-weight: 400;
     }
+
+    &::after {
+      content: attr(data-total-pages);
+    }
+
+    &:not(.is-last-page)::after {
+      display: none;
+    }
   }
+
+  // &__indication {
+  //   grid-column: 2 / 3;
+  //   display: grid;
+  //   grid-auto-flow: column;
+  //   gap: 10px;
+  //   align-items: center;
+
+  //   span:nth-child(2) {
+  //     font-weight: 400;
+  //   }
+  // }
 
   .page-numbers:not(:last-child):not(.current) {
     display: none;
