@@ -26,7 +26,7 @@
 
       window.addEventListener("scroll", handleScroll);
     } else {
-      animation.cancel();
+      animation?.cancel();
 
       sidebar.onpointermove = null;
       sidebar.onpointerleave = null;
