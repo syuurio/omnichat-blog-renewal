@@ -11,6 +11,9 @@ $official_site_url = array(
   'tw' => 'https://www.omnichat.ai/tw/',
   'hk' => 'https://www.omnichat.ai/zh-hk/'
 );
+
+$isFrontPage = is_front_page();
+$searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' . pll_current_language();
 ?>
 
 <div class="navbar font-outfit" id="navbar">
@@ -36,7 +39,8 @@ $official_site_url = array(
     <div class="navbar__menu">
       <div class="menu">
         <?= wp_nav_menu(array('menu' => $menu_name)) ?>
-        <a class="menu-item navbar__icon navbar__search" href="/#section-search-post">
+        <a class="menu-item navbar__icon navbar__search" href="<?= $searchUrl ?>" aria-label="Search Post"
+          target="<?= $isFrontPage ? '_self' : '_blank' ?>">
           <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="10.8837" cy="9.88368" r="8.88368" stroke="currentColor" stroke-width="2" />
             <line x1="16.7071" y1="15.7929" x2="24.2071" y2="23.2929" stroke="currentColor" stroke-width="2" />
