@@ -87,6 +87,7 @@ $searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' 
 
 <script>
   (() => {
+    let observer;
     const mm = window.matchMedia('(width <= 1024px)');
     mm.addEventListener('change', onBreakpointChanged);
     onBreakpointChanged(mm);
@@ -115,7 +116,12 @@ $searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' 
         menuToggle.forEach(el => {
           el.onclick = (e) => toggleMenu()
         })
+
+        observer.disconnect();
+        observer = null;
       } else {
+        const dropdownElements = document.querySelectorAll('#navbar .sub-menu');
+        const observeAttribute = 'aria-expanded';
         // cleanup event listener from mobile
         menuItems.forEach(el => (el.onclick = null));
         menuToggle.forEach(el => (el.onclick = null));
@@ -123,6 +129,34 @@ $searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' 
         dropdownItems.forEach(el => {
           el.onpointerenter = () => toggleDropdown(el, true);
           el.onpointerleave = () => toggleDropdown(el, false);
+        })
+
+        observer = new MutationObserver((mutationList) => {
+          for (const { attributeName, target } of mutationList) {
+            if (attributeName === observeAttribute) {
+              const isOpen = target.getAttribute(attributeName) === 'true';
+
+              if (isOpen) {
+                const { width, right } = target.getBoundingClientRect();
+
+                if (right > window.innerWidth) {
+                  target.style = `left: auto; right: 0;`;
+                } else {
+                  target.style = `left: 50%; translate: -50%;`;
+                }
+              } else {
+                target.style = '';
+              }
+
+              if (target.childElementCount > 10) {
+                target.style.setProperty('--col', 2);
+              }
+            }
+          }
+        });
+
+        dropdownElements.forEach(el => {
+          observer.observe(el, { subtree: true, attributeFilter: [observeAttribute] });
         })
       }
 
@@ -172,36 +206,5 @@ $searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' 
         animation.onfinish = animation.cancel
       }
     }
-
-
-    const dropdownElements = document.querySelectorAll('#navbar .sub-menu');
-    const observeAttribute = 'aria-expanded';
-
-    dropdownElements.forEach(el => {
-      const observer = new MutationObserver((mutationList) => {
-        for (const { attributeName, target } of mutationList) {
-          if (attributeName === observeAttribute) {
-            const isOpen = target.getAttribute(attributeName) === 'true';
-
-            if (isOpen) {
-              const { width, right } = el.getBoundingClientRect();
-
-              if (right > window.innerWidth) {
-                el.style = `left: auto; right: 0;`;
-              } else {
-                el.style = `left: 50%; translate: -50%;`;
-              }
-            } else {
-              el.style = '';
-            }
-
-            if (el.childElementCount > 10) {
-              el.style.setProperty('--col', 2);
-            }
-          }
-        }
-      });
-      observer.observe(el, { subtree: true, attributeFilter: [observeAttribute] });
-    })
   })()
 </script>

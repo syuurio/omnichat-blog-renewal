@@ -15,12 +15,15 @@
   --grid-layout-2-1-col: 58% minmax(0, 1fr);
   --grid-layout-1-1-col: repeat(2, minmax(0, 1fr));
   --grid-layout-gap: 60px;
-  --main-border-radius: 12px;
-  --navbar-height: 90px;
+  --main-border-radius: 0.75rem;
+  --navbar-height: 5.625rem;
   --article-base-line-height: 1.75;
   --article-base-text-size: 1.125rem;
   --article-para-spacing: calc(var(--article-base-line-height) * var(--article-base-text-size));
-  --scroll-offset: calc(var(--wp-admin--admin-bar--height, 0px) + var(--navbar-height) + 20px);
+  --base-font: Inter, 'Noto Sans TC', sans-serif;
+  --font-outfit: Outfit, var(--base-font);
+  --scroll-offset: calc(var(--wp-admin--admin-bar--height, 0px) + var(--navbar-height) + 1.25rem);
+  font-size: max(16px, 1.11vw);
   scroll-behavior: smooth;
   scroll-padding-block-start: var(--scroll-offset);
 
@@ -43,18 +46,22 @@
     --grid-layout-1-1-col: 100%;
     --grid-layout-gap: 30px;
     --navbar-height: 76px;
+    --article-base-text-size: 1rem;
   }
 }
 
 body {
-  --wp--preset--font-size--small: 0.875rem;
-  --wp--preset--font-size--medium: 1rem;
-  font-size: var(--wp--preset--font-size--normal);
-  font-family: Inter, 'Noto Sans TC', sans-serif;
+  --wp--preset--font-size--small: 0.875rem !important;
+  --wp--preset--font-size--medium: 1rem !important;
+  --wp--style--global--content-size: max(1280px, 88vw) !important;
+  --wp--style--root--padding-right: max(24px, 1.67vw) !important;
+  --wp--style--root--padding-left: max(24px, 1.67vw) !important;
+  font-size: var(--text-size, 1rem);
+  font-family: var(--base-font);
+  line-height: var(--text-lh, 1.5) !important;
 
-  a {
-    text-decoration: none;
-    transition: all 200ms ease;
+  a:not(:hover) {
+    color: inherit;
   }
 
   button {
@@ -64,6 +71,7 @@ body {
     border: none;
     appearance: none;
     background-color: transparent;
+    font: inherit;
     cursor: pointer;
   }
 }
@@ -142,7 +150,6 @@ body {
   --quote-text-size: 1.375rem;
 
   .article__title {
-    line-height: 1.2;
     font-weight: 400;
     color: #1c1c1c;
   }
@@ -179,6 +186,14 @@ body {
 }
 
 :where(:lang(zh)) {
+  .navbar {
+    --text-size: min(1.112vw, 1rem);
+
+    .sub-menu {
+      --text-size: clamp(14px, 0.973vw, 0.875rem);
+    }
+  }
+
   #section-latest-article {
     --heading-size: 1.875rem;
     --cat-text-size: 1.125rem;
@@ -286,8 +301,7 @@ body {
 .wp-site-blocks {
   h1, h2, h3, h4, h5, h6,
   .taxonomy-category {
-    font-family: Outfit, Inter, 'Noto Sans TC', sans-serif !important;
-    line-height: 1.35;
+    font-family: var(--font-outfit) !important;
   }
 }
 
@@ -414,12 +428,17 @@ body {
   }
 }
 
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .dynamic-title {
   // text-wrap: balance;
   // letter-spacing: 0.04em;
-  font-size: var(--heading-size, 1.875rem);
+  font-size: var(--heading-size);
   font-weight: 500;
-  line-height: 1.35;
+  line-height: var(--text-lh);
   margin-block: 0;
 
   > * {
@@ -443,7 +462,7 @@ body {
 }
 
 .font-outfit {
-  font-family: Outfit, Inter, 'Noto Sans TC', sans-serif;
+  font-family: var(--font-outfit);
 }
 
 .grid-1-1-layout {
@@ -498,6 +517,7 @@ body {
 
   &__excerpt {
     font-size: 0.875rem;
+    line-height: 1.72;
   }
 
   &__date {
@@ -505,7 +525,6 @@ body {
     top: 0.4em;
     left: 0;
     font-size: 12px;
-    font-family: Outfit, Inter, sans-serif;
     color: #979797;
   }
 
@@ -690,6 +709,7 @@ body {
   }
 
   input {
+    appearance: none;
     padding-block: 1em;
     padding-inline-end: 2rem;
     padding-inline-start: 5.3rem;
@@ -697,7 +717,8 @@ body {
     color: currentColor;
     letter-spacing: 0.04em;
     font-size: 1.125rem !important;
-    font-family: Outfit, Inter, 'Noto Sans TC', sans-serif;
+    font-family: inherit !important;
+    background-color: inherit;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
     outline: 2px solid transparent;
     transition: outline 200ms ease;
@@ -776,7 +797,7 @@ body {
   place-items: center;
   grid-template-columns: 38px auto 38px;
   gap: 20px;
-  font-family: Outfit, Inter, sans-serif;
+  font-family: var(--font-outfit);
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
@@ -1005,11 +1026,8 @@ body {
   overflow: hidden;
 
   @include desktop-sm {
-    --col-count: 4;
-  }
-
-  @include mobile {
     --col-count: 3;
+    max-width: 768px !important;
   }
 
   > * {
@@ -1018,6 +1036,10 @@ body {
     height: 100% !important;
     padding: 13px 9px;
     background-color: #fff;
+
+    &:not(:nth-child(-n + 18)) {
+      display: none !important;
+    }
 
     &::before {
       content: '';
@@ -1041,7 +1063,7 @@ body {
   align-items: center;
   width: 100%;
   font-weight: 700;
-  font-family: Outfit, Inter, 'Noto Sans TC', sans-serif;
+  font-family: var(--font-outfit);
 
   &::after {
     content: '';
@@ -1583,6 +1605,10 @@ body {
 
   &__category .taxonomy-category {
     font-weight: 400;
+
+    > *:not(:nth-child(-n + 3)) {
+      display: none;
+    }
   }
 
   &__date {
@@ -1889,17 +1915,15 @@ body {
 
 .navbar {
   --menu-breakpoint: 1024px;
+  --menu-gap: 2.5vw;
   position: sticky;
   top: var(--wp-admin--admin-bar--height, 0);
-  height: var(--navbar-height);
+  height: auto;
+  font-size: var(--text-size, min(1.25vw, 1.125rem));
   background-color: #F5F5F5;
-  padding: 20px 24px;
+  padding: 1.25rem var(--wp--style--root--padding-left);
   z-index: 99999;
   box-shadow: 0 1px 14px rgba(0, 0, 0, 0.16);
-
-  @include mobile {
-    padding: 16px;
-  }
 
   ul {
     padding: 0;
@@ -1913,7 +1937,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 36px;
+    gap: var(--menu-gap);
     height: 100%;
 
     @include mobile {
@@ -1924,8 +1948,8 @@ body {
   .navbar__logo {
     display: flex;
     align-items: center;
-    gap: 24px;
-    font-size: 1.125rem;
+    gap: 1.2em;
+    font-size: max(1.39vw, 14px);
     font-weight: 500;
     color: #515150;
 
@@ -1933,20 +1957,26 @@ body {
       position: relative;
       display: flex;
       aspect-ratio: 176/50;
+      width: 8.8em;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: contain;
       }
-    
+    }
+
+    span {
+      position: relative;
+      margin-block-start: 0.3em;
+
       &::after {
         content: '';
         position: absolute;
-        right: -12px;
+        left: -0.6em;
         top: 50%;
-        transform: translateY(-50%);
-        width: 2px;
+        transform: translateX(-50%) translateY(-50%);
+        width: 0.1em;
         height: 1em;
         background-color: #9f9f9f;
       }
@@ -1954,11 +1984,11 @@ body {
 
 
 
-    @include mobile {
-      .logo {
-        max-width: 140px;
-      }
-    }
+     // @include mobile {
+     //   .logo {
+     //     max-width: 140px;
+     //   }
+     // }
 
     @media (width <= 480px) {
       span,
@@ -1975,6 +2005,8 @@ body {
 
     svg {
       display: block;
+      width: 1.74vw;
+      height: auto;
     }
 
     span {
@@ -2017,19 +2049,23 @@ body {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    gap: 36px;
+    gap: var(--menu-gap);
   }
 
-  .menu-item {
+  .menu-item,
+  .lang-item {
     position: relative;
     font-weight: 400;
-    text-wrap: balance;
-    color: #5a5a5a;
+    color: #2e2e2e;
     z-index: 0;
 
     &:hover {
       color: #006AFF;
     }
+  }
+
+  .menu-item {
+    text-wrap: balance;
 
     &:has(.sub-menu) > :first-child {
       position: relative;
@@ -2055,35 +2091,36 @@ body {
         }
       }
     }
+  }
 
-    .sub-menu {
-      display: grid;
-      grid-auto-flow: row;
-      grid-template-columns: repeat(var(--col, 1), minmax(var(--min-col-w, 12em), 1fr));
-      gap: var(--gap, 1em);
-      font-size: 0.875rem;
+  .sub-menu {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(var(--col, 1), minmax(var(--min-col-w, 12em), 1fr));
+    gap: var(--gap, 1em);
+    font-size: var(--text-size, clamp(14px, 1.112vw, 1rem));
+    line-height: var(--text-lh, 1.5);
 
-      @media (width > 1024px) {
+    @media (width > 1024px) {
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      padding-block: 1.25rem;
+      padding-inline: 1.25rem;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+
+      &:not([aria-expanded="true"]) {
+        display: none;
+      }
+
+      &::before {
+        content: '';
         position: absolute;
-        top: calc(100% + 0.75rem);
-        padding-block: 1.25rem;
-        padding-inline: 1.25rem;
-        background-color: #f1f1f1;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
-
-        &:not([aria-expanded="true"]) {
-          display: none;
-        }
-
-        &::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          top: -1rem;
-          height: 1rem;
-          z-index: -1;
-        }
+        inset: 0;
+        top: -1rem;
+        height: 1rem;
+        z-index: -1;
       }
     }
   }
@@ -2094,6 +2131,8 @@ body {
   }
 
   .official-site {
+    --text-size: 0.973vw;
+  
     a {
       display: block;
       min-width: 7.14em;
@@ -2101,16 +2140,14 @@ body {
       padding: 0.25em 1.2em !important;
       color: #fff !important;
       background-color: #006AFF;
-      font-size: 0.875rem;
       text-align: center;
+      font-size: var(--text-size);
 
       &:hover {
         background-color: #0033E6;
       }
     }
   }
-
-
 
   &[aria-expanded="true"] .navbar__menu--toggle {
     :nth-child(1) {
@@ -2129,6 +2166,9 @@ body {
   }
 
   @media (width <= 1024px) {
+    --text-size: 18px;
+    --menu-gap: 1.25em;
+
     &:is([aria-expanded="false"]) .navbar__menu {
       display: none;
     }
@@ -2148,55 +2188,60 @@ body {
         width: 100%;
         max-height: 100%;
         margin-inline: auto;
-        padding-inline: 40px;
-        padding-block: 80px;
+        padding-inline: calc(var(--wp--style--root--padding-left) * 1.25);
+        padding-block: var(--scroll-offset);
         overflow-y: auto;
       }
 
       .navbar__menu--toggle {
         position: absolute;
         top: calc(var(--navbar-height) * 0.5);
-        right: 16px;
+        right: var(--wp--style--root--padding-left);
         translate: 0 -50%;
       }
     }
 
     .navbar__icon {
+      color: inherit !important;
+
       svg {
         display: none;
       }
 
       span {
         display: block;
-        font-size: 1rem;
-        font-weight: 500;
       }
-    }
-
-    .navbar__lang {
-      pointer-events: none;
     }
 
     .menu {
       grid-auto-flow: row;
-      gap: 1.5em;
-    }
-
-    .official-site {
-      margin-inline-start: auto;
     }
 
     .menu-item {
+      font-weight: 600;
+
       [href="#"] {
         pointer-events: none;
-        font-weight: 500;
       }
+    }
 
-      .sub-menu {
-        --gap: 0.5em;
-        margin-block-start: 1rem;
-        padding-inline-start: 2rem;
+    .sub-menu {
+      --gap: 1em;
+      --text-size: 16px;
+      margin-block-start: 1em;
+      margin-block-end: 0.5em;
+      padding-inline-start: 2em;
+
+      .menu-item,
+      .lang-item {
+        font-weight: 400;
+        color: #5a5a5a;
       }
+    }
+
+    .official-site {
+      --text-size: 14px;
+      margin-inline-start: auto;
     }
   }
 }
@@ -2250,13 +2295,13 @@ body {
     h1,
     h2,
     h3 {
-      font-size: 2.25rem !important;
+      font-size: 2em !important;
       margin-block-start: 1.5em !important;
     }
 
     h4,
     h5 {
-      font-size: 1.625rem !important;
+      font-size: 1.44em !important;
       color: #0033E6 !important;
       margin-block-end: 0.1em !important;
 
@@ -2299,7 +2344,7 @@ body {
       font-size: var(--quote-text-size, 1.25rem) !important;
       text-align: center !important;
       letter-spacing: 0.04em !important;
-      line-height: 1.54;
+      // line-height: 1.54;
 
       &::before {
         content: '“';
@@ -2316,13 +2361,12 @@ body {
 
       > p {
         margin-block-end: 0 !important;
-        font-family: Outfit, 'Noto Sans TC', sans-serif;
       }
 
       > cite {
         font-size: 0.875rem !important;
         text-wrap: balance;
-        line-height: 2.2;
+        // line-height: 2.2;
 
         &::before {
           content: '';
