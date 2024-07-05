@@ -1,4 +1,4 @@
-<div class="faq font-outfit">
+<div class="faq">
   <div class="faq-list">
     <?php
   $show_more_link = get_field('faq_show_more_link');
@@ -11,7 +11,7 @@
     if (!empty($title) && !empty($content) && !empty($link)) :
   ?>
     <div class="faq-card group-hover">
-      <div class="faq-card__q">
+      <div class="faq-card__q dynamic-title">
         <h3 class="text-overflow-lines-4">
           <?= esc_html($title) ?>
         </h3>
