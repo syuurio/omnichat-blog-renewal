@@ -144,23 +144,26 @@
   }
 </style>
 <script>
-  HubSpotForms.onFormReady(customizeFormStyles);
+  (() => {
+    if (!window.HubSpotForms) return;
+    HubSpotForms.onFormReady(customizeFormStyles);
 
-  function customizeFormStyles() {
-    const iframe = document.querySelector('.hs-form-iframe');
-    const style = document.getElementById('hsform-styles');
+    function customizeFormStyles() {
+      const iframe = document.querySelector('.hs-form-iframe');
+      const style = document.getElementById('hsform-styles');
 
-    const iDocument = iframe.contentDocument;
-    iDocument.documentElement.lang = '<?= $lang ?>';
-    iDocument.head.insertAdjacentElement('beforeend', style);
+      const iDocument = iframe.contentDocument;
+      iDocument.documentElement.lang = '<?= pll_current_language() ?>';
+      iDocument.head.insertAdjacentElement('beforeend', style);
 
-    const fields = iDocument.querySelectorAll('.hs-form-field:not(.hs-fieldtype-radio)');
-    fields.forEach(field => {
-      const label = field.querySelector('label').children[0];
-      const input = field.querySelector('input');
-      input.setAttribute('placeholder', label.textContent);
-    });
+      const fields = iDocument.querySelectorAll('.hs-form-field:not(.hs-fieldtype-radio)');
+      fields.forEach(field => {
+        const label = field.querySelector('label').children[0];
+        const input = field.querySelector('input');
+        input.setAttribute('placeholder', label.textContent);
+      });
 
-    document.getElementById('form').style.visibility = 'visible';
-  }
+      document.getElementById('form').style.visibility = 'visible';
+    }
+  })();
 </script>
