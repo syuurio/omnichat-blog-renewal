@@ -22,25 +22,27 @@ $region = "na1";
     });
 
     // hsFormsOnReady.push(customize)
-    HubSpotForms.onFormReady(customize);
+    (() => {
+      HubSpotForms.onFormReady(customize);
 
-    function customize() {
-      const iframe = document.querySelector('.hs-form-iframe');
-      const iDocument = iframe.contentDocument;
+      function customize() {
+        const iframe = document.querySelector('.hs-form-iframe');
+        const iDocument = iframe.contentDocument;
 
-      const radioField = iDocument.querySelector('.hs-fieldtype-radio');
-      const radioGroupTitle = document.createElement('p');
-      radioGroupTitle.style = 'font-size: 18px; color:#1c1c1c; margin-block-end: 10px;';
-      radioGroupTitle.textContent = '<?= $lang === "en" ? "Main business markets" : "主要經營市場" ?>';
-      radioField.insertAdjacentElement('afterbegin', radioGroupTitle);
+        const radioField = iDocument.querySelector('.hs-fieldtype-radio');
+        const radioGroupTitle = document.createElement('p');
+        radioGroupTitle.style = 'font-size: 18px; color:#1c1c1c; margin-block-end: 10px;';
+        radioGroupTitle.textContent = '<?= $lang === "en" ? "Main business markets" : "主要經營市場" ?>';
+        radioField.insertAdjacentElement('afterbegin', radioGroupTitle);
 
-      const footerText = iDocument.createElement('p');
-      const submit = iDocument.querySelector('.hs-submit');
-      const submitButton = submit.querySelector('input[type="submit"]');
-      submitButton.value = '<?= $lang === "en" ? "Submit" : "確認" ?>';
-      footerText.style = 'font-family: Inter, sans-serif; font-size: 10px; color:#979797; text-align: center;';
-      footerText.textContent = 'We’ll share a copy of this guide and send you content and updates about Omnichat’s products as we continue to build the world’s leading CDP.  We use your information according to our privacy policy. You can update your preferences at any time.';
-      submit.insertAdjacentElement('afterbegin', footerText);
-    }
+        const footerText = iDocument.createElement('p');
+        const submit = iDocument.querySelector('.hs-submit');
+        const submitButton = submit.querySelector('input[type="submit"]');
+        submitButton.value = '<?= $lang === "en" ? "Submit" : "確認" ?>';
+        footerText.style = 'font-family: Inter, sans-serif; font-size: 10px; color:#979797; text-align: center;';
+        footerText.textContent = 'We’ll share a copy of this guide and send you content and updates about Omnichat’s products as we continue to build the world’s leading CDP.  We use your information according to our privacy policy. You can update your preferences at any time.';
+        submit.insertAdjacentElement('afterbegin', footerText);
+      }
+    })()
   </script>
 </div>

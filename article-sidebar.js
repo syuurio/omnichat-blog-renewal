@@ -52,9 +52,7 @@
   }
 
   function toggleSidebar(state) {
-    const keyframe = state
-      ? { translate: "0 0" }
-      : { translate: "calc(100% + 8px) 0" };
+    const keyframe = state ? { opacity: 1 } : { opacity: 0 };
 
     animation = sidebar.animate(keyframe, {
       duration: 200,

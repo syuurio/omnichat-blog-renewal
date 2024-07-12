@@ -88,9 +88,21 @@ $searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' 
 <script>
   (() => {
     let observer;
+    const navbar = document.getElementById('navbar');
     const mm = window.matchMedia('(width <= 1024px)');
     mm.addEventListener('change', onBreakpointChanged);
     onBreakpointChanged(mm);
+    onNavbarResize(navbar)
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      onNavbarResize(entry.target)
+    });
+
+    resizeObserver.observe(navbar);
+
+    function onNavbarResize(target) {
+      document.documentElement.style.setProperty('--navbar-height', target.clientHeight + 'px')
+    }
 
     function onBreakpointChanged(e) {
       const isMobile = e.matches;
@@ -117,8 +129,10 @@ $searchUrl = $isFrontPage ? '#section-search-post' : pll_home_url() . 'search-' 
           el.onclick = (e) => toggleMenu()
         })
 
-        observer.disconnect();
-        observer = null;
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
       } else {
         const dropdownElements = document.querySelectorAll('#navbar .sub-menu');
         const observeAttribute = 'aria-expanded';
