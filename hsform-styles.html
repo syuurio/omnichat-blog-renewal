@@ -1,71 +1,77 @@
 <style id="hsform-styles">
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+TC:wght@400..700&family=Outfit:wght@400;700&display=swap');
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+TC:wght@400..700&family=Outfit:wght@400;700&display=swap");
 
-  p {
-    margin-block: 0;
+  :root {
+    --hs-input-height: 3.125rem;
+  }
+
+  @media (width > 1920px) {
+    :root {
+      font-size: 0.84vw;
+    }
   }
 
   .hbspt-form {
-    padding-block-start: 20px;
-    padding-inline: 20px;
-    font-family: Outfit, Inter, 'Noto Sans TC', sans-serif;
+    padding-block: 1.25rem;
+    padding-inline: 1.25rem;
+    font-family: Outfit, Inter, "Noto Sans TC", sans-serif;
     color: #2e2e2e;
     letter-spacing: 0.04em !important;
     line-height: 1.4;
   }
 
   .hs-main-font-element {
-    font-family: Outfit, Inter, 'Noto Sans TC', sans-serif !important;
+    font-family: Outfit, Inter, "Noto Sans TC", sans-serif !important;
   }
-
 
   .hbspt-form form {
     margin-block-end: 0;
   }
 
-  .hs-input:not([type=checkbox], [type=radio]) {
-    min-height: 50px !important;
+  .hs-input:not([type="checkbox"], [type="radio"]) {
+    min-height: var(--hs-input-height) !important;
     background-color: #fff !important;
     border-color: transparent !important;
-    border-radius: 12px !important;
+    border-radius: 0.75rem !important;
+    padding-inline: 1.5rem !important;
     letter-spacing: inherit;
-    color: currentColor;
+    color: #5a5a5a;
     font: inherit !important;
-    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.125rem 0.875rem rgba(0, 0, 0, 0.1);
   }
 
   .hs-input::placeholder {
     color: #979797;
   }
 
-  .hs-input[type=checkbox],
-  .hs-input[type=radio] {
+  .hs-input[type="checkbox"],
+  .hs-input[type="radio"] {
     margin: 0;
   }
 
-  .hs-input[type=radio] {
+  .hs-input[type="radio"] {
     appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    border: 1px solid currentColor;
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid currentColor;
   }
 
   .hs-form-field {
     margin-block-end: 0;
   }
 
-  .hs-form-field>label {
+  .hs-form-field > label {
     display: none;
   }
 
-  .hs-form-field+.hs-form-field {
-    margin-block-start: 20px;
+  .hs-form-field + .hs-form-field {
+    margin-block-start: 1.25rem;
   }
 
   .hs-form-field.hs-fieldtype-radio {
-    margin-block-start: 28px;
-    max-width: 460px;
+    margin-block-start: 1.75rem;
+    max-width: 28.75rem;
     margin-inline: auto;
   }
 
@@ -79,25 +85,29 @@
     margin-block-end: 0;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     font: inherit !important;
+    color: inherit !important;
     cursor: pointer;
   }
 
   .hs-form-radio label:has(input:checked)::after {
-    content: '';
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    background-color: #006AFF;
+    content: "";
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 0.25rem;
+    background-color: #006aff;
     position: absolute;
     top: 50%;
     left: 0;
     translate: 0 -50%;
   }
 
-  .hs-error-msgs label {
-    color: #FF7E55;
+  .hs-error-msg {
+    font-size: 0.875rem !important;
+    line-height: normal !important;
+    color: #ff7e55 !important;
+    margin-block: 0.375rem 0 !important;
   }
 
   /* .hs-form-field label:not(.hs-error-msg) {
@@ -108,39 +118,40 @@
     padding: 0 !important;
     display: grid;
     grid-auto-flow: row;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
   .hs-submit {
-    max-width: 460px;
-    margin-block-start: 24px;
+    max-width: 28.75rem;
+    margin-block-start: 1.5rem;
     margin-inline: auto;
   }
 
   .hs-submit .actions {
-    margin-block-start: 20px;
-    margin-block-end: 0;
+    min-width: 9.375rem;
+    margin-block: 0;
     padding-block: 0;
     text-align: center !important;
   }
 
   .hs-submit .hs-button {
     width: 100%;
-    max-width: 288px;
-    height: 60px;
-    border-radius: 12px;
-    font-size: 18px;
+    max-width: 18rem;
+    height: 3.75rem;
+    border-radius: 0.75rem !important;
     text-transform: uppercase;
     letter-spacing: inherit !important;
-    font-size: 18px !important;
+    font-family: inherit !important;
+    font-size: 1.125rem !important;
     font-weight: 700 !important;
-    background-color: #006AFF !important;
+    background-color: #006aff !important;
+    border: none !important;
     color: #fff !important;
     transition: background-color 200ms ease;
   }
 
   .hs-submit .hs-button:hover {
-    background-color: #0033E6 !important;
+    background-color: #0033e6 !important;
   }
 </style>
 <script>
@@ -149,21 +160,32 @@
     HubSpotForms.onFormReady(customizeFormStyles);
 
     function customizeFormStyles() {
-      const iframe = document.querySelector('.hs-form-iframe');
-      const style = document.getElementById('hsform-styles');
+      const iframe = document.querySelector(".hs-form-iframe");
+      const style = document.getElementById("hsform-styles");
 
       const iDocument = iframe.contentDocument;
+      const hsFormDefaultStyle = iDocument.head.querySelector(
+        '[id^="hs-form-style"]'
+      );
       iDocument.documentElement.lang = '<?= pll_current_language("locale") ?>';
-      iDocument.head.insertAdjacentElement('beforeend', style);
+      hsFormDefaultStyle.insertAdjacentElement("afterend", style);
 
-      const fields = iDocument.querySelectorAll('.hs-form-field:not(.hs-fieldtype-radio)');
-      fields.forEach(field => {
-        const label = field.querySelector('label').children[0];
-        const input = field.querySelector('input');
-        input.setAttribute('placeholder', label.textContent);
+      const fields = iDocument.querySelectorAll(
+        ".hs-form-field:not(.hs-fieldtype-radio)"
+      );
+      fields.forEach((field) => {
+        const label = field.querySelector("label").children[0];
+        const input = field.querySelector("input");
+        input.setAttribute("placeholder", label.textContent);
       });
 
-      document.getElementById('form').style.visibility = 'visible';
+      const targetForm = document.getElementById("form");
+
+      if (targetForm) {
+        window.requestAnimationFrame(() => {
+          targetForm.style.visibility = "visible";
+        });
+      }
     }
   })();
 </script>

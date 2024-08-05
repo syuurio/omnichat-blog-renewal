@@ -1,0 +1,174 @@
+@use "mixin" as *;
+
+.newsletter-form {
+  &:root {
+    --hs-input-height: 3.75rem;
+    --main-border-radius: 0.75rem;
+    --wp--style--root--padding-right: max(24px, 1.5rem);
+  }
+
+  .custom-input {
+    --highlight-c: #006AFF;
+    position: relative;
+  
+    &::before {
+      font-family: 'Material Symbols Outlined';
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5a5a5a;
+      z-index: 1;
+      font-size: 1.75rem;
+      line-height: 1;
+  
+      @media (width <= 620px) {
+        left: 1rem;
+      }
+    }
+  
+    &__icon,
+    .wp-block-search__button {
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      translate: 0 -50%;
+      padding: 0;
+      margin: 0;
+      background-color: transparent !important;
+  
+      @media (width <= 620px) {
+        left: 1rem;
+      }
+    }
+  
+    input {
+      appearance: none;
+      padding-block: 1em;
+      padding-inline-end: 2rem;
+      padding-inline-start: 5.3rem;
+      border-radius: var(--main-border-radius) !important;
+      color: currentColor;
+      letter-spacing: 0.04em;
+      font-size: 1.125rem !important;
+      font-family: inherit !important;
+      background-color: inherit;
+      box-shadow: 0 0.25rem 0.875rem rgba(0, 0, 0, 0.16);
+      outline: 0.125rem solid transparent;
+      transition: outline 200ms ease;
+  
+      &::placeholder {
+        color: #979797;
+      }
+  
+      &::-webkit-search-cancel-button {
+        display: none;
+      }
+  
+      @media (width <= 620px) {
+        font-size: 1rem !important;
+        padding-inline-start: 3.2rem;
+      }
+    }
+  
+    svg {
+      vertical-align: text-bottom;
+      color: #5a5a5a;
+    }
+  
+    &:hover {
+      &::before {
+        color: var(--highlight-c);
+      }
+  
+      input {
+        outline: 0.125rem solid var(--highlight-c);
+      }
+  
+      svg {
+        color: var(--highlight-c);
+      }
+    }
+  
+    &:has(input:focus),
+    &:has(input:focus-visible) {
+      &::before {
+        color: var(--highlight-c);
+      }
+  
+      input {
+        outline: 0.1875rem solid var(--highlight-c);
+      }
+  
+      svg {
+        color: var(--highlight-c);
+      }
+    }
+  
+    &.custom-search {
+      .wp-block-search__button {
+        left: 1.5rem;
+  
+        svg {
+          scale: -1 1;
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+  
+        @media (width <= 620px) {
+          left: 0.5rem;
+        }
+      }
+      // &::before {
+      //   content: '\e8b6';
+      // }
+    }
+  }
+
+  .hbspt-form {
+    padding-inline: var(--wp--style--root--padding-right);
+  }
+
+  .hbspt-form form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 0.75rem;
+
+    @media (width <= 620px) {
+      grid-template-columns: none;
+      gap: 1.25rem;
+    }
+  }
+
+  .input:has(.icon) {
+    position: relative;
+    font-size: 1.125rem;
+    color: #5a5a5a;
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    translate: 0 -50%;
+    width: 1.5rem;
+    height: auto;
+  }
+
+  .hs-input {
+    padding-inline-start: 5rem !important;
+  }
+
+  .hs-submit {
+    max-width: 100%;
+    margin-block-start: 0;
+    
+    .hs-button {
+      max-width: 100%;
+    }
+
+    @media (width <= 620px) {
+      margin-inline: 0;
+    }
+  }
+}

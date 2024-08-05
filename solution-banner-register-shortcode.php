@@ -19,9 +19,7 @@ $tags = array_map(function ($tag) {
 $is_solution = in_array('solution', $tags);
 
 if ($is_solution) {
-  [$solution_type] = array_filter($tags, function ($tag) use ($solution_list) {
-    return in_array($tag, $solution_list);
-  });
+  [$solution_type] = array_values(array_filter($tags, fn($tag) => in_array($tag, $solution_list)));
 
 	if ($solution_type) {
     $args = array(
@@ -31,7 +29,7 @@ if ($is_solution) {
         array(
           'taxonomy' => 'wp_pattern_category',
           'field' => 'slug',
-          'terms' => 'solutions',
+          'terms' => 'solution-banner',
         )
       ),
     );

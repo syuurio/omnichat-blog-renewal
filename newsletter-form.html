@@ -1,0 +1,192 @@
+<?php
+$lang = pll_current_language();
+?>
+<style id="newsletter-form-styles">
+  .newsletter-form:root {
+    --hs-input-height: 3.75rem;
+    --main-border-radius: 0.75rem;
+    --wp--style--root--padding-right: max(24px, 1.5rem);
+  }
+  .newsletter-form .custom-input {
+    --highlight-c: #006aff;
+    position: relative;
+  }
+  .newsletter-form .custom-input::before {
+    font-family: "Material Symbols Outlined";
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5a5a5a;
+    z-index: 1;
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+  @media (width <= 620px) {
+    .newsletter-form .custom-input::before {
+      left: 1rem;
+    }
+  }
+  .newsletter-form .custom-input__icon,
+  .newsletter-form .custom-input .wp-block-search__button {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    translate: 0 -50%;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+  @media (width <= 620px) {
+    .newsletter-form .custom-input__icon,
+    .newsletter-form .custom-input .wp-block-search__button {
+      left: 1rem;
+    }
+  }
+  .newsletter-form .custom-input input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-block: 1em;
+    padding-inline-end: 2rem;
+    padding-inline-start: 5.3rem;
+    border-radius: var(--main-border-radius) !important;
+    color: currentColor;
+    letter-spacing: 0.04em;
+    font-size: 1.125rem !important;
+    font-family: inherit !important;
+    background-color: inherit;
+    box-shadow: 0 0.25rem 0.875rem rgba(0, 0, 0, 0.16);
+    outline: 0.125rem solid rgba(0, 0, 0, 0);
+    transition: outline 200ms ease;
+  }
+  .newsletter-form .custom-input input::-moz-placeholder {
+    color: #979797;
+  }
+  .newsletter-form .custom-input input::placeholder {
+    color: #979797;
+  }
+  .newsletter-form .custom-input input::-webkit-search-cancel-button {
+    display: none;
+  }
+  @media (width <= 620px) {
+    .newsletter-form .custom-input input {
+      font-size: 1rem !important;
+      padding-inline-start: 3.2rem;
+    }
+  }
+  .newsletter-form .custom-input svg {
+    vertical-align: text-bottom;
+    color: #5a5a5a;
+  }
+  .newsletter-form .custom-input:hover::before {
+    color: var(--highlight-c);
+  }
+  .newsletter-form .custom-input:hover input {
+    outline: 0.125rem solid var(--highlight-c);
+  }
+  .newsletter-form .custom-input:hover svg {
+    color: var(--highlight-c);
+  }
+  .newsletter-form .custom-input:has(input:focus)::before,
+  .newsletter-form .custom-input:has(input:focus-visible)::before {
+    color: var(--highlight-c);
+  }
+  .newsletter-form .custom-input:has(input:focus) input,
+  .newsletter-form .custom-input:has(input:focus-visible) input {
+    outline: 0.1875rem solid var(--highlight-c);
+  }
+  .newsletter-form .custom-input:has(input:focus) svg,
+  .newsletter-form .custom-input:has(input:focus-visible) svg {
+    color: var(--highlight-c);
+  }
+  .newsletter-form .custom-input.custom-search .wp-block-search__button {
+    left: 1.5rem;
+  }
+  .newsletter-form .custom-input.custom-search .wp-block-search__button svg {
+    scale: -1 1;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  @media (width <= 620px) {
+    .newsletter-form .custom-input.custom-search .wp-block-search__button {
+      left: 0.5rem;
+    }
+  }
+  .newsletter-form .hbspt-form {
+    padding-inline: var(--wp--style--root--padding-right);
+  }
+  .newsletter-form .hbspt-form form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 0.75rem;
+  }
+  @media (width <= 620px) {
+    .newsletter-form .hbspt-form form {
+      grid-template-columns: none;
+      gap: 1.25rem;
+    }
+  }
+  .newsletter-form .input:has(.icon) {
+    position: relative;
+    font-size: 1.125rem;
+    color: #5a5a5a;
+  }
+  .newsletter-form .icon {
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    translate: 0 -50%;
+    width: 1.5rem;
+    height: auto;
+  }
+  .newsletter-form .hs-input {
+    padding-inline-start: 5rem !important;
+  }
+  .newsletter-form .hs-submit {
+    max-width: 100%;
+    margin-block-start: 0;
+  }
+  .newsletter-form .hs-submit .hs-button {
+    max-width: 100%;
+  }
+  @media (width <= 620px) {
+    .newsletter-form .hs-submit {
+      margin-inline: 0;
+    }
+  } /*# sourceMappingURL=newsletter-form-styles.min.css.map */
+</style>
+<script
+  charset="utf-8"
+  type="text/javascript"
+  src="//js.hsforms.net/forms/embed/v2.js"
+></script>
+<script>
+  (() => {
+    hbspt.forms.create({
+      region: "na1",
+      portalId: "4971687",
+      formId: "00a89cb8-db84-4a25-8fb4-f40e847dfafa",
+    });
+    HubSpotForms.onFormReady(customizeFormStyles);
+
+    function customizeFormStyles() {
+      const iframe = document.querySelector(".hs-form-iframe");
+      const style = document.getElementById("newsletter-form-styles");
+
+      const iDocument = iframe.contentDocument;
+      iDocument.documentElement.classList.add("newsletter-form");
+      iDocument.head.insertAdjacentElement("beforeend", style);
+
+      const input = iDocument.querySelector(".hs-input[name='email']");
+      const icon =
+        '<svg class="icon" width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="21" height="16" rx="3" fill="white" stroke="currentColor" stroke-width="2"/><path d="M1.5 3L10.3 9.6C11.0111 10.1333 11.9889 10.1333 12.7 9.6L21.5 3" stroke="currentColor" stroke-width="2"/></svg>';
+      input.parentElement.insertAdjacentHTML("afterbegin", icon);
+      input.parentElement.classList.add("custom-input");
+
+      const submit = iDocument.querySelector(".hs-submit");
+      const submitButton = submit.querySelector('input[type="submit"]');
+      submitButton.value = '<?= $lang === "en" ? "Subscribe" : "訂閱" ?>';
+    }
+  })();
+</script>

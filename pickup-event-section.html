@@ -17,8 +17,12 @@ $alt = $img['alt'] ? $img['alt'] : $eventTitle . ' Image';
 <div class="home-event-card">
   <div class="home-event-card__img">
     <figure class="aspect-img">
-      <img src="<?= esc_url($imgURL) ?>" alt="<?= esc_attr($alt) ?>" width="<?= esc_attr($width) ?>"
-        height="<?= esc_attr($height) ?>">
+      <img
+        src="<?= esc_url($imgURL) ?>"
+        alt="<?= esc_attr($alt) ?>"
+        width="<?= esc_attr($width) ?>"
+        height="<?= esc_attr($height) ?>"
+      />
     </figure>
   </div>
   <div class="home-event-card__info">
