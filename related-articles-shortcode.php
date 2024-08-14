@@ -12,7 +12,7 @@ $query_count = $query_count - count($related_articles_by_admin);
 
 foreach ($related_articles_by_admin as $post) :
 $title = get_the_title($post->ID);
-$content = wp_strip_all_tags(get_the_content($post->ID), true);
+$content = wp_strip_all_tags($post->post_content, true);
 $excerpt = substr($content, 0, 500);
 $permalink = get_permalink($post->ID);
 $featuredImage = get_the_post_thumbnail($post->ID);

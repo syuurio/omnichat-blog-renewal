@@ -1,4 +1,3 @@
-<?php
 $lang = pll_current_language();
 $lang_suffix = array(
   'en' => 'global',
@@ -43,4 +42,3 @@ if ($is_solution) {
     }
   }
 }
-?>

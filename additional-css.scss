@@ -82,6 +82,10 @@ body {
     font: inherit;
     cursor: pointer;
   }
+
+  img {
+    max-width: 100% !important;
+  }
 }
 
 /* Global Styles Start */
@@ -294,8 +298,8 @@ body {
     position: absolute !important;
     top: 0.4em;
     left: 0;
-    font-size: 0.75rem;
-    color: #979797;
+    font-size: 0.75rem !important;
+    color: #979797 !important;
   }
 
   &__footer {
@@ -975,17 +979,19 @@ body {
   gap: 0.0625rem !important;
   overflow: hidden;
 
-  @include desktop-sm {
-    --col-count: 3;
-    max-width: 48rem !important;
-  }
-
   > * {
     position: relative !important;
+    display: grid !important;
+    place-content: center;
     width: 100% !important;
     height: auto !important;
-    padding: 0.875rem 1.25rem;
+    // padding: 0.875rem 1.25rem;
     background-color: #fff;
+    aspect-ratio: 165/85;
+
+    // @include mobile {
+    //   padding: 0.5rem 0.625rem;
+    // }
 
     &:not(:nth-child(-n + 18)) {
       display: none !important;
@@ -1001,11 +1007,25 @@ body {
   }
 
   img {
-    width: auto !important;
+    width: 76% !important;
     height: auto !important;
     aspect-ratio: 150/68;
     object-fit: contain;
     cursor: default !important;
+    margin: auto;
+  }
+
+  @include desktop-sm {
+    --col-count: 3;
+    max-width: 48rem !important;
+  }
+
+  @include mobile {
+    --col-count: 2;
+
+    > *:not(:nth-child(-n + 12)) {
+      display: none !important;
+    }
   }
 }
 
@@ -1157,12 +1177,10 @@ body {
     margin-block-start: auto;
     font-size: 1.125rem;
 
-    a {
-      &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-      }
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
     }
   }
 
@@ -1722,6 +1740,13 @@ body {
 
     > p:first-child {
       font-size: 1.125rem;
+    }
+
+    > p:nth-child(2) {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     :has(.read-more) {
