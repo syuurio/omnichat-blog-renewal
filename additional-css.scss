@@ -27,7 +27,7 @@
   scroll-behavior: smooth;
   scroll-padding-block-start: var(--scroll-offset);
 
-  @media (width > 1920px) {
+  @media (min-width: 1921px) {
     font-size: 0.84vw;
   }
 
@@ -37,7 +37,7 @@
     --grid-layout-gap: 1.875rem;
   }
 
-  @media (width <= 782px) and (width > 480px) {
+  @media (max-width: 782px) and (min-width: 481px) {
     --wp-admin--admin-bar--height: 46px !important;
   }
 
@@ -49,7 +49,7 @@
     --article-base-text-size: 1rem;
   }
 
-  @media (width <= 480px) {
+  @media (max-width: 480px) {
     --wp-admin--admin-bar--height: 0px !important;
   }
 }
@@ -1537,7 +1537,7 @@ body {
         padding-block-end: 1.25rem;
         overflow-y: auto;
 
-        @media (height <= 768px) {
+        @media (max-height: 768px) {
           --gap: 1.25rem;
 
           .sticky-item {
@@ -1829,7 +1829,7 @@ body {
     align-items: center;
     line-height: 1.5;
 
-    @media (width > 1024px) {
+    @media (min-width: 1025px) {
       >:nth-child(1) {
         grid-column: span 2;
       }
@@ -1979,7 +1979,7 @@ body {
      //   }
      // }
 
-    @media (width <= 480px) {
+    @media (max-width: 480px) {
       span,
       .logo::after {
         display: none;
@@ -2029,7 +2029,7 @@ body {
       transition: all 200ms ease;
     }
 
-    @media (width > 1024px) {
+    @media (min-width: 1025px) {
       display: none;
     }
   }
@@ -2064,7 +2064,7 @@ body {
         color: #006AFF;
       }
 
-      @media (width > 1024px) {
+      @media (min-width: 1025px) {
         display: flex;
         align-items: center;
         gap: 0.625rem;
@@ -2091,7 +2091,7 @@ body {
     font-size: var(--text-size);
     line-height: var(--text-lh, 1.5);
 
-    @media (width > 1024px) {
+    @media (min-width: 1025px) {
       position: absolute;
       top: calc(100% + 0.75rem);
       padding-block: 1.25rem;
@@ -2156,7 +2156,7 @@ body {
     }
   }
 
-  @media (width <= 1024px) {
+  @include desktop-sm {
     --text-size: 1.125rem !important;
     --menu-gap: 1.25em !important;
 
@@ -2305,7 +2305,7 @@ body {
   //   gap: calc(2em - 24px);
   // }
 
-  @media (width >= 600px) {
+  @media (min-width: 600px) {
     .custom-menu-items__dropdown-item {
       position: absolute;
       // top: 100%;
@@ -2324,7 +2324,7 @@ body {
     }
   }
 
-  @media (width < 600px) {
+  @media (max-width: 599px) {
     grid-auto-flow: row;
 
 
