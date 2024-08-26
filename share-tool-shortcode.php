@@ -1,7 +1,8 @@
 <?php
+$lang = pll_current_language();
 $encodedURL = urlencode(get_permalink());
 $title = wp_get_document_title();
-$social_media = ['line', 'linkedin', 'whatsapp'];
+$social_media = $lang === 'tw' ? ['line', 'linkedin', 'whatsapp'] : ['whatsapp', 'line', 'linkedin'];
 $links = [
   'facebook' => "https://www.facebook.com/sharer.php?u=$encodedURL",
   'twitter' => "https://twitter.com/share?url=$encodedURL&text=$title",
