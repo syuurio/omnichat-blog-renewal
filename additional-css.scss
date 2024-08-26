@@ -66,6 +66,7 @@ body {
 
   a {
     text-decoration: none;
+
     &:where(:not(:hover)) {
       color: inherit;
     }
@@ -1594,9 +1595,29 @@ body {
     }
   }
 
-  .article__date {
+  .article__info {
+    display: flex;
+    align-items: baseline;
     font-size: 0.875rem;
+    font-family: var(--font-outfit);
+  }
+
+  .article__author {
+    font-size: 0.875rem;
+    color: #1c1c1c;
+    font-weight: 500;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .article__date {
     color: #979797;
+
+    &::before {
+      content: '｜'
+    }
   }
 
   .article__image {
