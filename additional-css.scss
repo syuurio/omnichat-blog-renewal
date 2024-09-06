@@ -265,6 +265,16 @@ body {
     background-color: #d9d9d9;
   }
 
+  &__logo {
+    --ratio: 176/54;
+    max-width: 11rem;
+
+    img {
+      object-position: left center;
+      object-fit: contain;
+    }
+  }
+
   &__category {
     @extend .article-categories;
     font-size: var(--cat-text-size, 1rem);
@@ -1645,7 +1655,13 @@ body {
   }
 
   .toc {
-    // margin-block: var(--article-para-spacing);
+    &:not(:has(.toc-list)),
+    .toc-list:empty {
+      .toc-title {
+        display: none;
+      }
+    }
+
     &-title {
       font-weight: 700;
       margin: 0 !important;

@@ -47,7 +47,7 @@ function render_success_case_logo () {
 	
 	ob_start();
 	?>
-	<div class="case-card__logo aspect-img">
+	<div class="article-card__logo aspect-img">
 		<figure>
 			<img src="<?= $imgURL ?>" alt="<?= $alt ?>" width="<?= $width ?>" height="<?= $height ?>" />
 		</figure>
