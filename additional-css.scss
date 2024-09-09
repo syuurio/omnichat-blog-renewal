@@ -2493,6 +2493,9 @@ body {
         color: inherit !important;
 
         @extend %text-truncate;
+        @include mobile {
+          --line: 3;
+        }
       }
     }
 
